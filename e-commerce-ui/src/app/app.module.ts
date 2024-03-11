@@ -16,7 +16,13 @@ import { authGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserService } from './services/user.service';
 import { UserAuthService } from './services/user-auth.service';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -27,7 +33,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AdminComponent,
     UserComponent,
     ForbiddenComponent,
-    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,16 +40,22 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule,
     HttpClientModule,
     RouterModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
-    { provide: 'authGuard', useValue: authGuard }, 
+    { provide: 'authGuard', useValue: authGuard },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    },     
+    },
     UserService,
-    UserAuthService
+    UserAuthService,
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })

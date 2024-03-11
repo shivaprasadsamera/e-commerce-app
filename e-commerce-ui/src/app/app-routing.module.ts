@@ -7,19 +7,22 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { authGuard } from './auth/auth.guard';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: 'home', title: 'Home | eShop', component: HomeComponent },
+  { path: '', title: 'Home | eShop', component: HomeComponent },
   {
     path: 'admin',
     title: 'Admin | eShop',
     component: AdminComponent,
+    canActivate: [authGuard],
+    data: { roles: ['Admin'] },
   },
   {
     path: 'user',
     title: 'User | eShop',
     component: UserComponent,
+    canActivate: [authGuard],
+    data: { roles: ['User'] },
   },
   { path: 'login', title: 'Login | eShop', component: LoginComponent },
   {
@@ -27,11 +30,11 @@ const routes: Routes = [
     title: 'Forbidden | eShop',
     component: ForbiddenComponent,
   },
-  {
-    path: '**',
-    title: 'Pagenotfound ',
-    component: PageNotFoundComponent,
-  },
+  // {
+  //   path: '**',
+  //   title: 'Pagenotfound ',
+  //   component: PageNotFoundComponent,
+  // },
 ];
 
 @NgModule({

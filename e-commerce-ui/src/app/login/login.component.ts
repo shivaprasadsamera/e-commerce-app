@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
+
+  hide = true;
+
   constructor(
     private userService: UserService,
     private userAuthService: UserAuthService,
