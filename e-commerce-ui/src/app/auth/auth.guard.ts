@@ -1,14 +1,12 @@
-import { CanActivateFn, Router } from '@angular/router';
-import { Injector } from '@angular/core';
+import { CanActivateFn, Router,ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { inject } from '@angular/core';
 import { UserAuthService } from '../services/user-auth.service';
 import { UserService } from '../services/user.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const injector = Injector.create({ providers: [] });
-
-  const userAuthService = injector.get(UserAuthService);
-  const router = injector.get(Router);
-  const userService = injector.get(UserService);
+export const authGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:RouterStateSnapshot): boolean => {
+  const userAuthService = inject(UserAuthService);
+  const router = inject(Router);
+  const userService = inject(UserService);
 
   const token = userAuthService.getToken();
 
