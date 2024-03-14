@@ -19,10 +19,10 @@ import { UserAuthService } from './services/user-auth.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import {MatInputModule} from '@angular/material/input';
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [
     { provide: 'authGuard', useValue: authGuard },
