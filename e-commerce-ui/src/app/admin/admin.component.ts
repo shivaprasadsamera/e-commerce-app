@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
   styleUrl: './admin.component.css',
 })
 export class AdminComponent implements OnInit {
+  
   message: any;
 
   constructor(private userService: UserService) {}
@@ -16,7 +17,7 @@ export class AdminComponent implements OnInit {
   }
 
   forAdmin() {
-    this.userService.forUser().subscribe({
+    this.userService.forAdmin().subscribe({
       next: (response) => {
         console.log(response);
         this.message = response;
