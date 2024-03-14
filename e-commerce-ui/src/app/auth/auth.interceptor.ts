@@ -38,6 +38,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.router.navigate(['/forbidden']);
         }
         throw new Error('Something is wrong');
+       
       })
     );
   }
@@ -45,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
   private addToken(request: HttpRequest<any>, token: string | null) {
     return request.clone({
       setHeaders: {
-        Authorization: `Beare ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   }
