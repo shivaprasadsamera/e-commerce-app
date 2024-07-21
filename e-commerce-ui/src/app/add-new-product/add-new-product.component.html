@@ -1,0 +1,62 @@
+<div class="container mt-5">
+  <div class="card p-2">
+    <div class="row">
+      <div class="col-6 text-center">
+        <form action="" #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+          <h1 class="product-form">Product Details</h1>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>productName</mat-label>
+            <input
+              matInput
+              placeholder="product Name"
+              [(ngModel)]="product.productName"
+              name="productName"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>productDescription</mat-label>
+            <input
+              matInput
+              placeholder="product Description"
+              [(ngModel)]="product.productDescription"
+              name="productDescription"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>productActualPrice</mat-label>
+            <input
+              matInput
+              placeholder="product Actual Price"
+              [(ngModel)]="product.productActualPrice"
+              name="productActualPrice"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>productDiscountedPrice</mat-label>
+            <input
+              matInput
+              placeholder="product Discounted Price"
+              [(ngModel)]="product.productDiscountedPrice"
+              name="productDiscountedPrice"
+            />
+          </mat-form-field>
+
+          <div class="w-100">
+            <button mat-stroked-button color="primary" class="me-3">
+              Clear
+            </button>
+            <button mat-stroked-button color="primary" type="submit">
+              Add Product
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-6">Image Area</div>
+    </div>
+  </div>
+</div>
