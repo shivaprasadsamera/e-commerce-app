@@ -14,6 +14,7 @@ public class Product {
     private String productName;
     private String productDescription;
     private Double productDiscountedPrice;
+    private Double productActualPrice;
 
     public Integer getProductId() {
         return productId;
@@ -55,5 +56,5 @@ public class Product {
         this.productActualPrice = productActualPrice;
     }
 
-    private Double productActualPrice;
+
 }
