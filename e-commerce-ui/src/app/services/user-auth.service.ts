@@ -59,4 +59,14 @@ export class UserAuthService implements OnInit {
       token !== undefined
     );
   }
+
+   public isAdmin(){
+    const roles:any[] = this.getRoles();
+    return roles[0].roleName === 'Admin';
+  }
+
+  public isUser(){
+    const roles:any[] = this.getRoles();
+    return roles[0].roleName === 'User';
+  }
 }
