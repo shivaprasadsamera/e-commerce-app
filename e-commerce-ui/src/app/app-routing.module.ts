@@ -7,6 +7,7 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { authGuard } from './auth/auth.guard';
+import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 
 const routes: Routes = [
   { path: '', title: 'Home | eShop', component: HomeComponent },
@@ -30,6 +31,9 @@ const routes: Routes = [
     title: 'Forbidden | eShop',
     component: ForbiddenComponent,
   },
+  {path: 'addNewProduct',
+  title: 'addNewProduct | eShop',
+  component: AddNewProductComponent,},
   // {
   //   path: '**',
   //   title: 'Pagenotfound ',
