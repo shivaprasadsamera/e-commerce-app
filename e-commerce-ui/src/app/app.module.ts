@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
     AdminComponent,
     UserComponent,
     ForbiddenComponent,
+    AddNewProductComponent,
   ],
   imports: [
     BrowserModule,
