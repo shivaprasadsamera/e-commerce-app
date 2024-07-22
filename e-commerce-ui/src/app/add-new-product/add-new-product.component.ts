@@ -28,9 +28,9 @@ export class AddNewProductComponent implements OnInit {
       next: (response: Product) => {
         productForm.reset();
       },
-      error:(error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
-      }
-  });
+      },
+    });
   }
 }
