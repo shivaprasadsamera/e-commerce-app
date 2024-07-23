@@ -14,4 +14,14 @@ export class ProductService {
       product
     );
   }
+  public getAllProducts() {
+    return this.httpClient.get<Product[]>(
+      'http://localhost:8585/getAllProducts'
+    );
+  }
+  public deleteProduct(productId: number) {
+    return this.httpClient.delete(
+      'http://localhost:8585/deleteProductDetails/' + productId
+    );
+  }
 }
