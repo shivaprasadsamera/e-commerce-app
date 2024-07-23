@@ -23,14 +23,25 @@
  @Service
  public class JwtService implements UserDetailsService {
 
-     @Autowired
-     private UserDao userDao;
+//     @Autowired
+//     private UserDao userDao;
+//
+//     @Autowired
+//     private JwtUtil jwtUtil;
+//
+//     @Autowired
+//     private AuthenticationManager authenticationManager;
+
+     private final UserDao userDao;
+     private final JwtUtil jwtUtil;
+     private final AuthenticationManager authenticationManager;
 
      @Autowired
-     private JwtUtil jwtUtil;
-
-     @Autowired
-     private AuthenticationManager authenticationManager;
+     public JwtService(UserDao userDao, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
+         this.userDao = userDao;
+         this.jwtUtil = jwtUtil;
+         this.authenticationManager = authenticationManager;
+     }
 
      public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
          String userName = jwtRequest.getUserName();
