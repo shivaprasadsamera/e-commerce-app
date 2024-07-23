@@ -17,6 +17,7 @@
  import org.springframework.stereotype.Service;
 
  import java.util.HashSet;
+ import java.util.Optional;
  import java.util.Set;
 
  @Service
@@ -40,27 +41,35 @@
 
          String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
-         User user = userDao.findById(userName).get();
-
-         return new JwtResponse(user, newGeneratedToken);
+//         User user = userDao.findById(userName).get();
+         Optional<User> userOptional = userDao.findById(userName);
+         if (userOptional.isPresent()) {
+             User user = userOptional.get();
+             return new JwtResponse(user, newGeneratedToken);
+         } else {
+             throw new UsernameNotFoundException("User not found with username: " + userName);
+         }
+//         return new JwtResponse(user, newGeneratedToken);
      }
 
      @Override
      public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-         User user = userDao.findById(username).get();
+//         User user = userDao.findById(username).get();
+         Optional<User> userOptional = userDao.findById(username);
 
-         if (user != null) {
+         if (userOptional.isPresent()) {
+             User user = userOptional.get();
              return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getUserPassword(), getAuthorities(user));
          } else {
-             throw new UsernameNotFoundException("Username is not valid");
+             throw new UsernameNotFoundException("Username not found: " + username);
          }
 
      }
 
-     private Set getAuthorities(User user) {
-         Set authorities = new HashSet();
+     private Set<SimpleGrantedAuthority> getAuthorities(User user) {
+         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
          user.getRole().forEach(role -> {
-             authorities.add(new SimpleGrantedAuthority("Role " + role.getRoleName()));
+             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
          });
          return authorities;
      }
