@@ -27,18 +27,15 @@ const routes: Routes = [
   },
   { path: 'login', title: 'Login | eShop', component: LoginComponent },
   {
+    path: 'addNewProduct',
+    title: 'addNewProduct | eShop',
+    component: AddNewProductComponent,
+  },
+  {
     path: 'forbidden',
     title: 'Forbidden | eShop',
     component: ForbiddenComponent,
   },
-  {path: 'addNewProduct',
-  title: 'addNewProduct | eShop',
-  component: AddNewProductComponent,},
-  // {
-  //   path: '**',
-  //   title: 'Pagenotfound ',
-  //   component: PageNotFoundComponent,
-  // },
 ];
 
 @NgModule({
