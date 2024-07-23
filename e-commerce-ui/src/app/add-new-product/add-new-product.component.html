@@ -62,21 +62,34 @@
 
       <div class="col-6">
         <div>
+          <div class="dropzone" appDrag (files)="fileDropped($event)">
+            <div class="dropzone-text text-center">
+              Drag and drop your file or
+              <a (click)="selectFile.click()" class="browse-btn">Browse</a> a
+              file
+            </div>
+          </div>
+
           <input
             type="file"
             multiple
             value="select"
             #selectFile
             (change)="onFileSelected($event)"
+            class="d-none"
           />
         </div>
 
         <div class="mt-5">
           <div class="row">
             <mat-grid-list cols="4" rowHeight="1:1">
-              <mat-grid-tile *ngFor="let file of product.productImages; let i = index;">
+              <mat-grid-tile
+                *ngFor="let file of product.productImages; let i = index"
+              >
                 <div class="position-relative">
-                  <span class="image-remove-btn" (click)="removeImages(i)">X</span>
+                  <span class="image-remove-btn" (click)="removeImages(i)"
+                    >X</span
+                  >
                   <img
                     [src]="file.url"
                     alt="product-img"
