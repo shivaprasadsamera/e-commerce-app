@@ -4,6 +4,7 @@ import com.ecommerce.backend.service.JwtService;
 import com.ecommerce.backend.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,11 +21,21 @@ import java.io.IOException;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtUtil jwtUtil;
+//    @Autowired
+//    private JwtUtil jwtUtil;
+//
+//    @Autowired
+//    @Lazy
+//    private JwtService jwtService;
+
+    private final JwtUtil jwtUtil;
+    private final JwtService jwtService;
 
     @Autowired
-    private JwtService jwtService;
+    public JwtRequestFilter(JwtUtil jwtUtil,  @Lazy JwtService jwtService) {
+        this.jwtUtil = jwtUtil;
+        this.jwtService = jwtService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
