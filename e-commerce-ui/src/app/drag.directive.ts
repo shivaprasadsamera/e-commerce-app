@@ -39,8 +39,6 @@ export class DragDirective {
     evt.stopPropagation();
     this.background = '#eee';
 
-    // let fileHandle : FileHandle = null;
-
     if (evt.dataTransfer && evt.dataTransfer.files.length > 0) {
       const file = evt.dataTransfer.files[0];
       const url = this.domSanitizer.bypassSecurityTrustUrl(
