@@ -23,14 +23,6 @@
  @Service
  public class JwtService implements UserDetailsService {
 
-//     @Autowired
-//     private UserDao userDao;
-//
-//     @Autowired
-//     private JwtUtil jwtUtil;
-//
-//     @Autowired
-//     private AuthenticationManager authenticationManager;
 
      private final UserDao userDao;
      private final JwtUtil jwtUtil;
