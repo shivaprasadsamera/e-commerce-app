@@ -28,6 +28,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { DragDirective } from './drag.directive';
 import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
 import { MatTableModule } from '@angular/material/table';
+import { ShowProductImagesDialogComponent } from './show-product-images-dialog/show-product-images-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { MatTableModule } from '@angular/material/table';
     AddNewProductComponent,
     DragDirective,
     ShowProductDetailsComponent,
+    ShowProductImagesDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatGridListModule,
     MatTableModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: 'authGuard', useValue: authGuard },
