@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -22,7 +23,14 @@ public class ProductService {
     }
 
     public Product getProductDetailsById(Integer productId){
-        return productDao.findById(productId).get();
+//        return productDao.findById(productId).get();
+        Optional<Product> product = productDao.findById(productId);
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            // Handle the case when the product is not found
+            throw new RuntimeException("Product not found for id: " + productId);
+        }
     }
 
     public void deleteProductDetails(Integer productId){
