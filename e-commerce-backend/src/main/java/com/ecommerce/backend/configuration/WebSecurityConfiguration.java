@@ -30,6 +30,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService jwtService;
 
+
+
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -41,7 +44,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.cors()
                 .and()
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate","/registerNewUser","/getAllProducts","/deleteProductDetails/{productId}").permitAll()
+                .authorizeRequests().antMatchers("/authenticate","/registerNewUser").permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()
                 .and()
