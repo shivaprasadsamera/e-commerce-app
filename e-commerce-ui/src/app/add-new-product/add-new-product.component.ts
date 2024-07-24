@@ -5,6 +5,7 @@ import { ProductService } from '../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FileHandle } from '../model/file-handle.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-new-product',
@@ -12,7 +13,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './add-new-product.component.css',
 })
 export class AddNewProductComponent implements OnInit {
+  isNewProduct = true;
+
   product: Product = {
+    productId: 0,
     productName: '',
     productDescription: '',
     productDiscountedPrice: 0,
@@ -22,11 +26,16 @@ export class AddNewProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.product = this.activatedRoute.snapshot.data['product'];
+
+    if (this.product && this.product.productId) {
+      this.isNewProduct = false;
+    }
   }
 
   addProduct(productForm: NgForm) {

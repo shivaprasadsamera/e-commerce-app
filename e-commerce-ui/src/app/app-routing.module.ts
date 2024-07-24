@@ -9,6 +9,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { authGuard } from './auth/auth.guard';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
+import { ProductResolverService } from './services/product-resolver.service';
 
 const routes: Routes = [
   { path: '', title: 'Home | eShop', component: HomeComponent },
@@ -39,11 +40,14 @@ const routes: Routes = [
     component: AddNewProductComponent,
     canActivate: [authGuard],
     data: { roles: ['Admin'] },
+    resolve: { product: ProductResolverService },
   },
   {
     path: 'showProductDetails',
     title: 'showProductDetails | eShop',
     component: ShowProductDetailsComponent,
+    canActivate: [authGuard],
+    data: { roles: ['Admin'] },
   },
 ];
 

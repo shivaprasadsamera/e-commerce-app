@@ -53,8 +53,22 @@
             <button mat-stroked-button color="primary" class="me-3">
               Clear
             </button>
-            <button mat-stroked-button color="primary" type="submit">
+            <button
+              mat-stroked-button
+              color="primary"
+              type="submit"
+              *ngIf="isNewProduct"
+            >
               Add Product
+            </button>
+
+            <button
+              mat-stroked-button
+              color="primary"
+              type="submit"
+              *ngIf="!isNewProduct"
+            >
+              Update Product
             </button>
           </div>
         </form>
