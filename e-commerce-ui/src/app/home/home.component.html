@@ -1,8 +1,14 @@
 <div class="conatiner mt-3 p-3">
   <mat-grid-list cols="4" rowHeight="3:5" gutterSize="15">
     <mat-grid-tile *ngFor="let pic of productDetails"
-      ><div class="row home-page-product-pmage">
-        <img [src]="pic.productImages[0].url" alt="product-img" />
+      ><div class="row p-3">
+        <div class="image-container">
+          <img
+            [src]="pic.productImages[0].url"
+            class="home-page-product-pmage"
+            alt="product-img"
+          />
+        </div>
         <div class="mt-3">
           <p>
             <strong>{{ pic.productName }}</strong>
