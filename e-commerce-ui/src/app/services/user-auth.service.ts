@@ -60,13 +60,13 @@ export class UserAuthService implements OnInit {
     );
   }
 
-   public isAdmin(){
-    const roles:any[] = this.getRoles();
+  public isAdmin() {
+    const roles: any[] = this.getRoles();
     return roles[0].roleName === 'Admin';
   }
 
-  public isUser(){
-    const roles:any[] = this.getRoles();
+  public isUser() {
+    const roles: any[] = this.getRoles();
     return roles[0].roleName === 'User';
   }
 }
