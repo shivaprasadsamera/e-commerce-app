@@ -22,9 +22,7 @@ export class ShowProductDetailsComponent implements OnInit {
     'Product Description',
     'Product DiscountedPrice',
     'Product ActualPrice',
-    'Images',
-    'Edit',
-    'Delete',
+    'Actions',
   ];
 
   constructor(
@@ -80,6 +78,6 @@ export class ShowProductDetailsComponent implements OnInit {
   }
 
   public editProductDetails(productId: number) {
-    this.router.navigate(['/addNewProduct', {productId: productId}]);
+    this.router.navigate(['/addNewProduct', { productId: productId }]);
   }
 }

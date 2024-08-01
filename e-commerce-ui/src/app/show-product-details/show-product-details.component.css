@@ -1,0 +1,10 @@
+.product-desc {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 35% !important;
+}
+
+table td {
+  padding: 10px;
+}
