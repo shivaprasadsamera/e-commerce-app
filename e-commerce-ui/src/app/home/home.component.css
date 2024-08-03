@@ -25,3 +25,108 @@ mat-grid-tile {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.btn-view-details:hover {
+  background-color: #0056b3;
+  color: #fff;
+  transform: translateY(-2px);
+  border-color: #0056b3;
+}
+
+.btn-view-details:active {
+  background-color: #004085;
+  color: #fff;
+  transform: translateY(0);
+  border-color: #004085;
+}
+
+.review-stars {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem; /* Adjust size as needed */
+}
+
+.star {
+  color: #f5c518; /* Star color */
+  margin-right: 2px; /* Spacing between stars */
+  position: relative;
+}
+
+.star.empty {
+  color: #ddd; /* Color for empty stars */
+}
+
+.star.half::before {
+  content: "\2605"; /* Full star character */
+  position: absolute;
+  color: #f5c518; /* Color for the filled part of the half star */
+  width: 50%;
+  overflow: hidden;
+}
+
+.star.half::after {
+  content: "\2605"; /* Full star character */
+  position: absolute;
+  color: #ddd; /* Color for the empty part of the half star */
+  left: 50%;
+  width: 50%;
+  overflow: hidden;
+}
+
+.rating-number {
+  font-size: 1rem;
+  color: #333; 
+  margin-left: 8px; 
+}
+
+.banner {
+  background-image: url('../../assets/10389998.jpg'); 
+  background-size: cover;
+  background-position: center;
+  height: 400px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+.banner-content {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5); 
+  border-radius: 8px;
+}
+
+.banner h1 {
+  font-size: 3rem; 
+  margin: 0;
+  font-weight: bold;
+}
+
+.banner p {
+  font-size: 1.25rem; 
+  margin: 10px 0;
+}
+
+.btn-shop-now {
+  display: inline-block;
+  background-color: #ff9900; 
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-shop-now:hover {
+  background-color: #e68a00; 
+  transform: translateY(-2px); 
+}
+
+.btn-shop-now:active {
+  background-color: #cc7a00; 
+  transform: translateY(0); 
+}

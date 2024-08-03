@@ -10,6 +10,7 @@ import { authGuard } from './auth/auth.guard';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
 import { ProductResolverService } from './services/product-resolver.service';
+import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
 
 const routes: Routes = [
   { path: '', title: 'Home | eShop', component: HomeComponent },
@@ -48,6 +49,12 @@ const routes: Routes = [
     component: ShowProductDetailsComponent,
     canActivate: [authGuard],
     data: { roles: ['Admin'] },
+  },
+  {
+    path: 'productViewDetails',
+    title: 'productViewDetails | eShop',
+    component: ProductViewDetailsComponent,
+    resolve: { product: ProductResolverService },
   },
 ];
 
