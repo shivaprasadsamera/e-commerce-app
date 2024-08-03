@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-6">
+      <div class="image-container card">
+        <img
+          [src]="product.productImages[selectedProductIndex].url"
+          alt=""
+          srcset=""
+        />
+      </div>
+
+      <mat-grid-list cols="3" rowHeight="1:1" gutterSize="10px" class="mt-3">
+        <mat-grid-tile
+          *ngFor="let file of product.productImages; let i = index"
+          (click)="changeIndex(i)"
+        >
+          <div class="card p-5">
+            <img [src]="file.url" alt="image" />
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div class="col-6">
+      <div class="product-information">
+        <div class="product-title">
+          <strong
+            ><h2>{{ product.productName }}</h2></strong
+          >
+        </div>
+        <div class="mt-3 product-description text-muted">
+          <p>{{ product.productDescription }}</p>
+        </div>
+        <div class="mt-3">
+          <p>
+            <strong>&#8377; {{ product.productDiscountedPrice }}</strong>
+          </p>
+          <p class="text text-secondary">
+            &#8377; <s> {{ product.productActualPrice }}</s>
+          </p>
+        </div>
+
+        <div class="star-rating mt-3">
+          <span class="star" data-rating="1">&#9733;</span>
+          <span class="star" data-rating="2">&#9733;</span>
+          <span class="star" data-rating="3">&#9733;</span>
+          <span class="star" data-rating="4">&#9733;</span>
+          <span class="star" data-rating="5">&#9733;</span>
+        </div>
+
+        <div class="mt-3">
+          <button mat-raised-button color="warn" class="w-25 btn">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

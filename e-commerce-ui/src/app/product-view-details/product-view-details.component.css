@@ -1,0 +1,55 @@
+.star-rating {
+  direction: rtl;
+  display: inline-block;
+}
+
+.star {
+  font-size: 2rem;
+  color: #f8f52a; /* Default star color */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.col-6 {
+    padding: 15px;
+}
+.mat-grid-list {
+    width: 100%;
+}
+
+/* Card Styling */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+}
+
+/* Image Styling */
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+
+
+.btn:hover {
+    background-color:  #6f42c1; 
+    transform: translateY(-3px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+}
+
+
