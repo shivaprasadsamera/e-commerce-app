@@ -40,7 +40,7 @@ public class OrderDetailsService {
                     orderInput.getFullName(),
                     orderInput.getFullAddress(),
                     orderInput.getContactNumber(),
-                    orderInput.getAlterNateContactNumber(),
+                    orderInput.getAlternateContactNumber(),
                     ORDER_PLACED,
                    product.getProductActualPrice() * productQuantity.getQuantity(),
                     product,
