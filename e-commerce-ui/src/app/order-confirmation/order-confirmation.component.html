@@ -1,0 +1,17 @@
+<div class="container mt-3">
+  <div class="card text-center p-5">
+    <div *ngIf="orderPlacedMessage" class="alert alert-info mt-3">
+      {{ orderPlacedMessage }}
+    </div>
+    <div class="home-btn">
+      <button
+        mat-mini-fab
+        aria-label="Go to Home"
+        color="primary"
+        (click)="goToHome()"
+      >
+        <mat-icon>home</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
