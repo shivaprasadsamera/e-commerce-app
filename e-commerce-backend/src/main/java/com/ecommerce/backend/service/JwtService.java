@@ -6,6 +6,7 @@
  import com.ecommerce.backend.entity.User;
  import com.ecommerce.backend.util.JwtUtil;
  import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.context.annotation.Lazy;
  import org.springframework.security.authentication.AuthenticationManager;
  import org.springframework.security.authentication.BadCredentialsException;
  import org.springframework.security.authentication.DisabledException;
@@ -29,7 +30,7 @@
      private final AuthenticationManager authenticationManager;
 
      @Autowired
-     public JwtService(UserDao userDao, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
+     public JwtService(UserDao userDao, JwtUtil jwtUtil, @Lazy AuthenticationManager authenticationManager) {
          this.userDao = userDao;
          this.jwtUtil = jwtUtil;
          this.authenticationManager = authenticationManager;
@@ -84,9 +85,11 @@
          try {
              authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, userPassword));
          } catch (DisabledException e) {
-             throw new Exception("User disabled!");
+             System.out.println("User is disabled: " + userName);
+             throw new Exception("User account is disabled!");
          } catch (BadCredentialsException e) {
-             throw new Exception("Bad Credentials!");
+             System.out.println("Invalid credentials for user: " + userName);
+             throw new Exception("Invalid username or password!");
          }
 
      }
