@@ -6,4 +6,11 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
 }
-/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v142/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format("woff2");
+  font-display: swap;
+}

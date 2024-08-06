@@ -37,6 +37,7 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     PrivacyPolicyComponent,
     TermsOfServiceComponent,
     ContactUsComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

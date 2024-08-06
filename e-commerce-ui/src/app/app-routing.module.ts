@@ -17,6 +17,7 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', title: 'Home | eShop', component: HomeComponent },
@@ -89,6 +90,7 @@ const routes: Routes = [
     canActivate: [authGuard],
     data: { roles: ['User'] },
   },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
