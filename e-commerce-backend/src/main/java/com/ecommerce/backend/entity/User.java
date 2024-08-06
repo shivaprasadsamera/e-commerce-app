@@ -11,6 +11,7 @@ public class User {
     private String userFirstName;
     private String userLastName;
     private String userPassword;
+    private String userEmail;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLE",
     joinColumns = {
@@ -61,5 +62,13 @@ public class User {
 
     public void setRole(Set<Role> role) {
         this.role = role;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
