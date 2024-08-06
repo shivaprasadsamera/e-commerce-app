@@ -32,6 +32,11 @@ import { ShowProductImagesDialogComponent } from './show-product-images-dialog/s
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +53,10 @@ import { BuyProductComponent } from './buy-product/buy-product.component';
     ShowProductImagesDialogComponent,
     ProductViewDetailsComponent,
     BuyProductComponent,
+    OrderConfirmationComponent,
+    PrivacyPolicyComponent,
+    TermsOfServiceComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +72,8 @@ import { BuyProductComponent } from './buy-product/buy-product.component';
     MatGridListModule,
     MatTableModule,
     MatDialogModule,
+    MatPaginator,
+    MatPaginatorModule,
   ],
   providers: [
     { provide: 'authGuard', useValue: authGuard },

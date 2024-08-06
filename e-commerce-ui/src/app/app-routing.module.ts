@@ -13,6 +13,10 @@ import { ProductResolverService } from './services/product-resolver.service';
 import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { BuyProductResolverService } from './services/buy-product-resolver.service';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
   { path: '', title: 'Home | eShop', component: HomeComponent },
@@ -36,6 +40,18 @@ const routes: Routes = [
     path: 'forbidden',
     title: 'Forbidden | eShop',
     component: ForbiddenComponent,
+  },
+  {
+    path: 'privacyPolicy',
+    component: PrivacyPolicyComponent,
+  },
+  {
+    path: 'termsOfService',
+    component: TermsOfServiceComponent,
+  },
+  {
+    path: 'contactUs',
+    component: ContactUsComponent,
   },
   {
     path: 'addNewProduct',
@@ -65,6 +81,13 @@ const routes: Routes = [
     canActivate: [authGuard],
     data: { roles: ['User'] },
     resolve: { productdetails: BuyProductResolverService },
+  },
+  {
+    path: 'orderConfirm',
+    title: 'orderConfirm | eShop',
+    component: OrderConfirmationComponent,
+    canActivate: [authGuard],
+    data: { roles: ['User'] },
   },
 ];
 
