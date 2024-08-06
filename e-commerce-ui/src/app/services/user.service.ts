@@ -24,7 +24,7 @@ export class UserService implements OnInit {
    * forUser
    */
   public forUser() {
-    return this.httpClient.get(this.API_PATH + '/forUser', {
+    return this.httpClient.get(this.API_PATH + '/api/users/forUser', {
       responseType: 'text',
     });
   }
@@ -33,9 +33,16 @@ export class UserService implements OnInit {
    * forAdmin
    */
   public forAdmin() {
-    return this.httpClient.get(this.API_PATH + '/forAdmin', {
+    return this.httpClient.get(this.API_PATH + '/api/users/forAdmin', {
       responseType: 'text',
     });
+  }
+
+  public registerNewUser(registerData: any) {
+    return this.httpClient.post(
+      this.API_PATH + '/api/users/registerNewUser',
+      registerData
+    );
   }
 
   /**
