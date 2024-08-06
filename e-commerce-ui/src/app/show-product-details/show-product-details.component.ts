@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Product } from '../model/product.model';

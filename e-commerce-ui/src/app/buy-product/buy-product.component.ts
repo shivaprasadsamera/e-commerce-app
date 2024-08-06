@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { OrderDetails } from '../model/order-details.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../model/product.model';
 import { ProductService } from '../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -24,7 +24,8 @@ export class BuyProductComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,10 +47,45 @@ export class BuyProductComponent implements OnInit {
       next: (response) => {
         console.log(response);
         orderForm.reset();
+        this.router.navigate(['/orderConfirm']);
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
       },
     });
+  }
+
+  getQuantityForProduct(productId: number) {
+    const filteredProduct = this.orderDetails.orderProductQuantityList.filter(
+      (productQuantity) => productQuantity.productId === productId
+    );
+
+    return filteredProduct[0].quantity;
+  }
+
+  getCalculatedTotal(productId: number, productDiscountedPrice: number) {
+    const filteredProduct = this.orderDetails.orderProductQuantityList.filter(
+      (productQuantity) => productQuantity.productId === productId
+    );
+
+    return filteredProduct[0].quantity * productDiscountedPrice;
+  }
+
+  onQuantityChanged(quantity: any, productId: number) {
+    this.orderDetails.orderProductQuantityList.filter(
+      (orderProduct) => orderProduct.productId === productId
+    )[0].quantity = quantity;
+  }
+
+  getCalculatedGrandTotal() {
+    let grandTotal = 0;
+
+    this.orderDetails.orderProductQuantityList.forEach((productQuantity) => {
+      const productPrice = this.productdetails.filter(
+        (product) => product.productId === productQuantity.productId
+      )[0].productDiscountedPrice;
+      grandTotal = grandTotal + productPrice * productQuantity.quantity;
+    });
+    return grandTotal;
   }
 }

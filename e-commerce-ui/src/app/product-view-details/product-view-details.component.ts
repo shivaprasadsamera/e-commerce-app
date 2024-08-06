@@ -17,8 +17,6 @@ export class ProductViewDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.product = this.activatedRoute.snapshot.data['product'];
     console.log(this.product);
-
-    throw new Error('Method not implemented.');
   }
 
   changeIndex(index: number) {

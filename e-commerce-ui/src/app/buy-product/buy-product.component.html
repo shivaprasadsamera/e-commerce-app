@@ -32,7 +32,7 @@
               placeholder="contactNumber"
               [(ngModel)]="orderDetails.contactNumber"
               name="contactNumber"
-              type="number"
+              type="tel"
             />
           </mat-form-field>
 
@@ -43,7 +43,7 @@
               placeholder="alternateContactNumber"
               [(ngModel)]="orderDetails.alternateContactNumber"
               name="alternateContactNumber"
-              type="number"
+              type="tel"
             />
           </mat-form-field>
 
@@ -55,9 +55,51 @@
         </form>
       </div>
       <div class="col-6">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-        reiciendis vero molestiae quia consectetur atque a, voluptatem veniam
-        voluptas harum!
+        <table class="checkout-table table">
+          <thead class="thead">
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody class="tbody">
+            <tr *ngFor="let product of productdetails">
+              <td>{{ product.productName }}</td>
+              <td>{{ product.productDiscountedPrice }}</td>
+              <td>
+                <select
+                  #quantity
+                  class="form-select"
+                  [ngModel]="getQuantityForProduct(product.productId)"
+                  (change)="
+                    onQuantityChanged(quantity.value, product.productId)
+                  "
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </td>
+              <td>
+                {{
+                  getCalculatedTotal(
+                    product.productId,
+                    product.productDiscountedPrice
+                  )
+                }}
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="3" class="text-end">Grand Total</td>
+              <td>{{ getCalculatedGrandTotal() }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
