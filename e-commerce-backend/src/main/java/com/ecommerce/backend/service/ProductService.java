@@ -3,6 +3,8 @@ package com.ecommerce.backend.service;
 import com.ecommerce.backend.dao.ProductDao;
 import com.ecommerce.backend.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -24,8 +26,15 @@ public class ProductService {
        return productDao.save(product);
     }
 
-    public List<Product> getAllProducts(){
-        return (List<Product>)productDao.findAll();
+    public List<Product> getAllProducts(int pageNumber, String searchKey){
+
+        Pageable pageable = PageRequest.of(pageNumber,12);
+        if (searchKey.isEmpty()){
+            return productDao.findAll(pageable);
+        }else{
+            return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(searchKey,searchKey,pageable);
+        }
+
     }
 
     public Product getProductDetailsById(Integer productId){
@@ -47,8 +56,6 @@ public class ProductService {
             Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found for ID: " + productId));
             list.add(product);
             return list;
-        }else {
-
         }
         return  new ArrayList<>();
     }
