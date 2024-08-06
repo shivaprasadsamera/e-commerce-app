@@ -12,13 +12,18 @@ import javax.annotation.PostConstruct;
 @RequestMapping("/api/users")
 public class UserController {
 
+    private final  UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostConstruct
     public void initRolesAndUsers(){
         userService.initRolesAndUser();
     }
+
 
     @PostMapping("/registerNewUser")
     public User registerNewUser(@RequestBody User user){
