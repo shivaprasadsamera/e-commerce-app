@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    throw new Error('Method not implemented.');
   }
 
   public getAllProducts() {
@@ -47,5 +46,9 @@ export class HomeComponent implements OnInit {
 
   showProductDetails(productId: number) {
     this.router.navigate(['/productViewDetails', { productId: productId }]);
+  }
+
+  privacyPolicy() {
+    this.router.navigate(['/orderConfirm']);
   }
 }

@@ -83,7 +83,7 @@ mat-grid-tile {
   background-image: url('../../assets/10389998.jpg'); 
   background-size: cover;
   background-position: center;
-  height: 400px; 
+  height: 300px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,3 +130,26 @@ mat-grid-tile {
   background-color: #cc7a00; 
   transform: translateY(0); 
 }
+
+/* Footer */
+.footer {
+  background: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer p {
+  margin-bottom: 10px;
+}
+
+.footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+/* .footer-nav a :hover{
+  cursor: pointer;
+} */
