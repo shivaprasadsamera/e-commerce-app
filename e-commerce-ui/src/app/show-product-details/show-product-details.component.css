@@ -11,3 +11,11 @@ table td {
 table {
   width: 100%;
 }
+
+.search-bar {
+  max-width: 400px;
+  margin: auto;
+}
+mat-form-field {
+  width: 100%;
+}

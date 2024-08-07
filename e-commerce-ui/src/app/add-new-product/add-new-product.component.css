@@ -1,37 +1,59 @@
-mat-grid-tile {
-  border: 1px solid #eee;
-  border-radius: 3px;
+/* Ensure the card takes full width on smaller screens */
+.card {
+  width: 100%;
+  margin: 0 auto;
 }
-.image-remove-btn {
-  position: absolute;
-  cursor: pointer;
-  top: -10px;
-  right: -10px;
-  background-color: #f50a0af4;
-  color: #fff;
-  border-radius: 50%;
-  width: 20px;
-  height: auto;
-  text-align: center;
+
+/* Form and card styling */
+.product-form {
+  margin-bottom: 1rem;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mt-5 {
+  margin-top: 3rem;
+}
+
+.me-3 {
+  margin-right: 1rem;
 }
 
 .dropzone {
-  height: 150px;
-  min-width: 100px;
-  width: 300px;
-  display: table;
-  background-color: #eee;
-  border: dashed 1px #aaa;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
+  border: 2px dashed #ccc;
+  padding: 2rem;
+  border-radius: 4px;
 }
+
 .dropzone-text {
-  display: table-cell;
-  vertical-align: middle;
+  font-size: 1rem;
 }
+
 .browse-btn {
+  color: #007bff;
   cursor: pointer;
-  color: #3939f4;
-  text-decoration: none;
+}
+
+/* Responsive grid for product images */
+.mat-grid-tile {
+  padding: 0.5rem;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 767px) {
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .mt-md-0 {
+    margin-top: 0 !important;
+  }
 }

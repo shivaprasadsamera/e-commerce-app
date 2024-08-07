@@ -1,4 +1,18 @@
 <div class="mt-3 p-2 w-100">
+  <div class="search-bar">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        #searchKeyword
+        (keyup)="searchByKeyword(searchKeyword.value)"
+        name="searchKey"
+        id="searchKey"
+        placeholder="Enter your search term"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
   <table mat-table [dataSource]="productDetails" class="mat-elevation-z8 w-100">
     <!-- Product Id  Column -->
     <ng-container matColumnDef="Id">
@@ -65,4 +79,28 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <div class="pagination-btn text-end p-2">
+    <!-- Previous Page Button -->
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="goToPreviousPage()"
+      [disabled]="pageNumber <= 0"
+      class="me-2"
+    >
+      Previous Page
+    </button>
+
+    <!-- Load More Button -->
+    <button
+      mat-stroked-button
+      color="secondary"
+      class="me-2"
+      (click)="loadMoreProducts()"
+      *ngIf="hasMore"
+    >
+      Load more
+    </button>
+  </div>
 </div>

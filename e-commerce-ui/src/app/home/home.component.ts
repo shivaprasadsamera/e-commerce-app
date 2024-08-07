@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ImageProcessingService } from '../services/image-processing.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,7 +12,12 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  pageNumber: number = 0;
   productDetails: Product[] = [];
+
+  hasMore: boolean = false;
+
+  cols?: number;
 
   constructor(
     private productService: ProductService,
@@ -22,21 +27,57 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.updateGridCols();
+    // window.addEventListener('resize', this.updateGridCols.bind(this));
   }
 
-  public getAllProducts() {
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.updateGridCols();
+  }
+
+  updateGridCols() {
+    const width = window.innerWidth;
+    if (width < 600) {
+      this.cols = 1;
+    } else if (width < 900) {
+      this.cols = 2;
+    } else if (width < 1200) {
+      this.cols = 3;
+    } else {
+      this.cols = 3;
+    } 
+  }
+
+  public loadMoreProducts() {
+    this.pageNumber = this.pageNumber + 1;
+    this.getAllProducts();
+  }
+
+  searchByKeyword(searchKeyword: any) {
+    this.pageNumber = 0;
+    this.productDetails = [];
+    this.getAllProducts(searchKeyword);
+  }
+
+  public getAllProducts(searchKey: string = '') {
     this.productService
-      .getAllProducts()
+      .getAllProducts(this.pageNumber, searchKey)
       .pipe(
-        map((x: Product[], i) =>
-          x.map((product: Product) =>
+        map((products: Product[], i) =>
+          products.map((product: Product) =>
             this.imageProcessingService.createImages(product)
           )
         )
       )
       .subscribe({
         next: (response: Product[]) => {
-          this.productDetails = response;
+          if (response.length == 9) {
+            this.hasMore = true;
+          } else {
+            this.hasMore = false;
+          }
+          response.forEach((product) => this.productDetails.push(product));
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);

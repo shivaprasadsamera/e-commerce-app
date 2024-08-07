@@ -17,7 +17,6 @@ export class ShowProductImagesDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.receiveImages();
-    throw new Error('Method not implemented.');
   }
 
   receiveImages() {

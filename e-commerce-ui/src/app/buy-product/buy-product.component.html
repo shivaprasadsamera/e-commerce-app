@@ -47,9 +47,19 @@
             />
           </mat-form-field>
 
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
           <div class="btn float-end">
-            <button mat-stroked-button color="primary" type="submit">
-              Place Order
+            <button
+              mat-stroked-button
+              color="primary"
+              type="submit"
+              [disabled]="isLoading || orderForm.invalid"
+            >
+              <span *ngIf="isLoading">Placing Order...</span>
+              <span *ngIf="!isLoading">Place Order</span>
             </button>
           </div>
         </form>
@@ -67,7 +77,11 @@
           <tbody class="tbody">
             <tr *ngFor="let product of productdetails">
               <td>{{ product.productName }}</td>
-              <td>{{ product.productDiscountedPrice }}</td>
+              <td>
+                {{
+                  product.productDiscountedPrice | currency : "INR" : "symbol"
+                }}
+              </td>
               <td>
                 <select
                   #quantity
@@ -89,14 +103,16 @@
                   getCalculatedTotal(
                     product.productId,
                     product.productDiscountedPrice
-                  )
+                  ) | currency : "INR" : "symbol"
                 }}
               </td>
             </tr>
 
             <tr>
               <td colspan="3" class="text-end">Grand Total</td>
-              <td>{{ getCalculatedGrandTotal() }}</td>
+              <td>
+                {{ getCalculatedGrandTotal() | currency : "INR" : "symbol" }}
+              </td>
             </tr>
           </tbody>
         </table>

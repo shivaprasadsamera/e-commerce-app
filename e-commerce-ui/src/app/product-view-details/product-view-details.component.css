@@ -1,55 +1,127 @@
-.star-rating {
-  direction: rtl;
-  display: inline-block;
+/* Main Image */
+.image-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Image Gallery */
+.image-gallery {
+  display: flex;
+}
+
+.thumbnail-tile {
+  cursor: pointer;
+}
+
+.thumbnail-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Product Information */
+.product-title h2 {
+  font-size: 1.8em;
+  margin: 0;
+}
+
+.product-description {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.product-pricing {
+  margin-top: 10px;
+}
+
+.discounted-price {
+  font-size: 1.5em;
+  color: #ff5722;
+}
+
+.original-price {
+  font-size: 1.2em;
+  text-decoration: line-through;
+}
+
+/* Star Rating */
+.review-stars {
+  display: flex;
+  align-items: center;
+  justify-content: start;
 }
 
 .star {
-  font-size: 2rem;
-  color: #f8f52a; /* Default star color */
-  cursor: pointer;
-  transition: color 0.2s ease-in-out;
+  font-size: 1.5em;
+  color: #ffc107;
 }
 
-.col-6 {
-    padding: 15px;
-}
-.mat-grid-list {
-    width: 100%;
+.star.full {
+  color: #ffc107;
 }
 
-/* Card Styling */
-.card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
+.star.half {
+  color: #ffc107;
 }
 
-.card:hover {
-    cursor: pointer;
-    transform: translateY(-5px);
+.star.empty {
+  color: #ddd;
 }
 
-/* Image Styling */
-.card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+.review-stars .star:not(:last-child) {
+  margin-right: 5px;
 }
 
-.card:hover img {
-    transform: scale(1.05);
+/* Button */
+.btn-buy-now {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
 }
 
+/* Responsive Design */
+@media (max-width: 992px) {
+  .image-gallery {
+    flex-direction: column;
+  }
 
-
-.btn:hover {
-    background-color:  #6f42c1; 
-    transform: translateY(-3px); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+  .thumbnail-tile {
+    margin-bottom: 10px;
+  }
 }
 
+@media (max-width: 768px) {
+  .product-title h2 {
+    font-size: 1.5em;
+  }
 
+  .product-description {
+    font-size: 0.9em;
+  }
+
+  .product-pricing {
+    font-size: 0.9em;
+  }
+
+  .review-stars {
+    font-size: 1.2em;
+  }
+
+  .btn-buy-now {
+    font-size: 0.9em;
+  }
+}

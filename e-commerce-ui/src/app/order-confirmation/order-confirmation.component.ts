@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class OrderConfirmationComponent implements OnInit {
   orderPlacedMessage: string | null = 'Order placed successfully!';
+  arrivalTime: string | null = 'It will arrived in 4 to 5 bussiness days!';
 
   constructor(private router: Router) {}
   ngOnInit(): void {}

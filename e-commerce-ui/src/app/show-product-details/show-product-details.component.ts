@@ -14,7 +14,10 @@ import { Router } from '@angular/router';
   styleUrl: './show-product-details.component.css',
 })
 export class ShowProductDetailsComponent implements OnInit {
+  pageNumber: number = 0;
   productDetails: Product[] = [];
+
+  hasMore: boolean = false;
 
   displayedColumns: string[] = [
     'Id',
@@ -34,15 +37,20 @@ export class ShowProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    throw new Error('Method not implemented.');
   }
 
-  public getAllProducts() {
+  searchByKeyword(searchKeyword: any) {
+    this.pageNumber = 0;
+    this.productDetails = [];
+    this.getAllProducts(searchKeyword);
+  }
+
+  public getAllProducts(searchKey: string = '') {
     this.productService
-      .getAllProducts()
+      .getAllProducts(this.pageNumber, searchKey)
       .pipe(
-        map((x: Product[], i) =>
-          x.map((product: Product) =>
+        map((products: Product[], i) =>
+          products.map((product: Product) =>
             this.imageProcessingService.createImages(product)
           )
         )
@@ -50,6 +58,11 @@ export class ShowProductDetailsComponent implements OnInit {
       .subscribe({
         next: (response: Product[]) => {
           this.productDetails = response;
+          if (response.length == 9) {
+            this.hasMore = true;
+          } else {
+            this.hasMore = false;
+          }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
@@ -79,5 +92,17 @@ export class ShowProductDetailsComponent implements OnInit {
 
   public editProductDetails(productId: number) {
     this.router.navigate(['/addNewProduct', { productId: productId }]);
+  }
+
+  public loadMoreProducts() {
+    this.pageNumber = this.pageNumber + 1;
+    this.getAllProducts();
+  }
+
+  public goToPreviousPage() {
+    if (this.pageNumber > 0) {
+      this.pageNumber = this.pageNumber - 1;
+      this.getAllProducts();
+    }
   }
 }

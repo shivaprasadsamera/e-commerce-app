@@ -13,6 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class BuyProductComponent implements OnInit {
   productdetails: Product[] = [];
+  errorMessage: string | null = null;
+  isLoading = false;
 
   orderDetails: OrderDetails = {
     fullName: '',
@@ -36,21 +38,21 @@ export class BuyProductComponent implements OnInit {
         quantity: 1,
       })
     );
-
-    console.log(this.productdetails);
-    console.log(this.orderDetails);
-    throw new Error('Method not implemented.');
   }
 
   public placeOrder(orderForm: NgForm) {
+    this.isLoading = true;
     this.productService.placeOrder(this.orderDetails).subscribe({
       next: (response) => {
-        console.log(response);
         orderForm.reset();
         this.router.navigate(['/orderConfirm']);
       },
       error: (error: HttpErrorResponse) => {
-        console.log(error);
+        console.error('Order placement failed:', error);
+        this.errorMessage = 'Failed to place the order. Please try again.';
+      },
+      complete: () => {
+        this.isLoading = false;
       },
     });
   }

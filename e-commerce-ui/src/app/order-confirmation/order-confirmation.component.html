@@ -1,7 +1,8 @@
 <div class="container mt-3">
   <div class="card text-center p-5">
     <div *ngIf="orderPlacedMessage" class="alert alert-info mt-3">
-      {{ orderPlacedMessage }}
+      <p>{{ orderPlacedMessage }}</p>
+      <p>{{ arrivalTime }}</p>
     </div>
     <div class="home-btn">
       <button

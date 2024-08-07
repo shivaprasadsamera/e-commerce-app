@@ -1,57 +1,60 @@
 <div class="container mt-5">
-  <div class="card p-2">
+  <div class="heading text-center">
+    <h1 class="product-form">Product Details</h1>
+  </div>
+  <div class="card p-5">
     <div class="row">
-      <div class="col-6 text-center">
+      <div class="col-12 col-md-6 text-center">
         <form
           action=""
           #productForm="ngForm"
           (ngSubmit)="addProduct(productForm)"
         >
-          <h1 class="product-form">Product Details</h1>
-
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>productName</mat-label>
+            <mat-label>Product Name</mat-label>
             <input
               matInput
-              placeholder="product Name"
+              placeholder="Product Name"
               [(ngModel)]="product.productName"
               name="productName"
             />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>productDescription</mat-label>
+            <mat-label>Product Description</mat-label>
             <input
               matInput
-              placeholder="product Description"
+              placeholder="Product Description"
               [(ngModel)]="product.productDescription"
               name="productDescription"
             />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>productActualPrice</mat-label>
+            <mat-label>Product Actual Price</mat-label>
             <input
               type="number"
               matInput
-              placeholder="product Actual Price"
+              placeholder="Product Actual Price"
               [(ngModel)]="product.productActualPrice"
               name="productActualPrice"
             />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>productDiscountedPrice</mat-label>
+            <mat-label>Product Discounted Price</mat-label>
             <input
               type="number"
               matInput
-              placeholder="product Discounted Price"
+              placeholder="Product Discounted Price"
               [(ngModel)]="product.productDiscountedPrice"
               name="productDiscountedPrice"
             />
           </mat-form-field>
 
-          <div class="w-100">
+          <div
+            class="w-100 mt-3 mb-3 p-2 d-flex flex-row align-middle justify-content-end"
+          >
             <button mat-stroked-button color="primary" class="me-3">
               Clear
             </button>
@@ -63,7 +66,6 @@
             >
               Add Product
             </button>
-
             <button
               mat-stroked-button
               color="primary"
@@ -76,8 +78,8 @@
         </form>
       </div>
 
-      <div class="col-6">
-        <div>
+      <div class="col-12 col-md-6 mt-3 mt-md-0">
+        <div class="d-flex flex-row align-middle justify-content-center">
           <div class="dropzone" appDrag (files)="fileDropped($event)">
             <div class="dropzone-text text-center">
               Drag and drop your file or
@@ -89,14 +91,13 @@
           <input
             type="file"
             multiple
-            value="select"
             #selectFile
             (change)="onFileSelected($event)"
             class="d-none"
           />
         </div>
 
-        <div class="mt-5">
+        <div class="mt-5 p-3">
           <div class="row">
             <mat-grid-list cols="4" rowHeight="1:1">
               <mat-grid-tile
@@ -106,12 +107,7 @@
                   <span class="image-remove-btn" (click)="removeImages(i)"
                     >X</span
                   >
-                  <img
-                    [src]="file.url"
-                    alt="product-img"
-                    width="100px"
-                    height="100px"
-                  />
+                  <img [src]="file.url" alt="product-img" class="img-fluid" />
                 </div>
               </mat-grid-tile>
             </mat-grid-list>
