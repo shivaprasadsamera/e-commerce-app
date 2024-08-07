@@ -40,6 +40,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { RegisterComponent } from './register/register.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     TermsOfServiceComponent,
     ContactUsComponent,
     RegisterComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
