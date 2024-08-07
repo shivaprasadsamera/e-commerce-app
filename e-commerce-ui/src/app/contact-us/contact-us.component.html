@@ -1,0 +1,68 @@
+<!-- Contact Us Content -->
+<main class="container">
+  <section class="contact-us">
+    <h1>Contact Us</h1>
+
+    <div class="contact-info">
+      <h2>Our Address</h2>
+      <p>eShop, eShop Lane, Hyderbad, Telangana, 500076</p>
+
+      <h2>Phone</h2>
+      <p>91 9398221364</p>
+
+      <h2>Email</h2>
+      <p><a href="mailto:support@eshop.com">support&#64;eshop.com</a></p>
+    </div>
+
+    <div class="contact-form">
+      <h2>Send Us a Message</h2>
+      <form action="/submit-contact-form" method="post">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <div class="map">
+      <h2>Find Us</h2>
+      <div id="map"></div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 eShop. All rights reserved.</p>
+    <nav class="footer-nav">
+      <a href="/privacyPolicy">Privacy Policy</a>
+      <a href="/termsOfService">Terms of Service</a>
+      <a href="/contactUs">Contact Us</a>
+    </nav>
+  </div>
+</footer>
+<script>
+  function initMap() {
+    var location = { lat: 40.7128, lng: -74.006 }; // Replace with your location's latitude and longitude
+    var map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 15,
+      center: location,
+    });
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+    });
+  }
+  // Initialize the map when the page loads
+  document.addEventListener("DOMContentLoaded", initMap);
+</script>
