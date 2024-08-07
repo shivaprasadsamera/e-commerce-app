@@ -28,7 +28,7 @@ public class ProductService {
 
     public List<Product> getAllProducts(int pageNumber, String searchKey){
 
-        Pageable pageable = PageRequest.of(pageNumber,12);
+        Pageable pageable = PageRequest.of(pageNumber,9);
         if (searchKey.isEmpty()){
             return productDao.findAll(pageable);
         }else{
