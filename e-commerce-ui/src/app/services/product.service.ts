@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../model/product.model';
 import { OrderDetails } from '../model/order-details.model';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +53,25 @@ export class ProductService {
     return this.httpClient.post(
       'http://localhost:8585/placeOrder',
       orderDetails
+    );
+  }
+
+  public addToCart(productId: number) {
+    return this.httpClient.get(
+      'http://localhost:8585/api/cart/addToCart/' + productId
+    );
+  }
+
+  public getCartDetails(): Observable<any> {
+    return this.httpClient.get<any>(
+      'http://localhost:8585/api/cart/getCartDetails'
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('An error occurred:', error.message);
+    return throwError(
+      () => new Error('Something went wrong; please try again later.')
     );
   }
 }
