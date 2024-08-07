@@ -38,6 +38,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { RegisterComponent } from './register/register.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { RegisterComponent } from './register/register.component';
     MatDialogModule,
     MatPaginator,
     MatPaginatorModule,
+    MatMenuModule,
+    MatSidenavModule
   ],
   providers: [
     { provide: 'authGuard', useValue: authGuard },
