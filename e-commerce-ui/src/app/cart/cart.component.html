@@ -1,0 +1,57 @@
+<div class="container mt-3">
+  <mat-table [dataSource]="cartDetails" class="mat-elevation-z8">
+    <!-- Product Name Column -->
+    <ng-container matColumnDef="productName">
+      <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.product.productName }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        <select
+          [value]="element.quantity"
+          (change)="handleQuantityChange($event, i)"
+          class="form-select"
+        >
+          <option *ngFor="let qty of [1, 2, 3, 4, 5]" [value]="qty">
+            {{ qty }}
+          </option>
+        </select>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{
+          element.product.productDiscountedPrice | currency : "INR" : "symbol"
+        }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.total | currency : "INR" : "symbol" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column (optional, e.g., Remove from Cart) -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-button color="warn">Remove</button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
