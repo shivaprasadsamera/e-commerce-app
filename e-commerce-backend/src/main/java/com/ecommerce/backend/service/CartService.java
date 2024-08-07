@@ -10,6 +10,7 @@ import com.ecommerce.backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -18,12 +19,14 @@ public class CartService {
     private final CartDao cartDao;
     private final ProductDao productDao;
     private final UserDao userDao;
+    private final JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    public CartService(CartDao cartDao, ProductDao productDao, UserDao userDao) {
+    public CartService(CartDao cartDao, ProductDao productDao, UserDao userDao, JwtRequestFilter jwtRequestFilter) {
         this.cartDao = cartDao;
         this.productDao = productDao;
         this.userDao = userDao;
+        this.jwtRequestFilter = jwtRequestFilter;
     }
 
 
@@ -46,4 +49,12 @@ public class CartService {
         return null;
 
     }
+
+    public List<Cart> getCartDetails(){
+        String userName = JwtRequestFilter.CURRENT_USER;
+        User user = userDao.findById(userName)
+                .orElseThrow(() -> new NoSuchElementException("User not found with id " + userName));
+        return cartDao.findByUser(user);
+    }
+
 }
