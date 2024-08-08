@@ -1,6 +1,7 @@
 package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.configuration.JwtRequestFilter;
+import com.ecommerce.backend.dao.CartDao;
 import com.ecommerce.backend.dao.OrderDetailsDao;
 import com.ecommerce.backend.dao.ProductDao;
 import com.ecommerce.backend.dao.UserDao;
@@ -17,18 +18,20 @@ public class OrderDetailsService {
 
     private static final String ORDER_PLACED = "Placed";
 
-    private final OrderDetailsDao orderDetailsDao;
     private final ProductDao productDao;
     private final UserDao userDao;
+    private final CartDao cartDao;
+    private final OrderDetailsDao orderDetailsDao;
 
     @Autowired
-    public OrderDetailsService(OrderDetailsDao orderDetailsDao, ProductDao productDao, UserDao userDao) {
-        this.orderDetailsDao = orderDetailsDao;
+    public OrderDetailsService(ProductDao productDao, UserDao userDao, CartDao cartDao, OrderDetailsDao orderDetailsDao) {
         this.productDao = productDao;
         this.userDao = userDao;
+        this.cartDao = cartDao;
+        this.orderDetailsDao = orderDetailsDao;
     }
 
-    public void placeOrder(OrderInput orderInput){
+    public void placeOrder(OrderInput orderInput, boolean isCartCheckout){
         List<OrderProductQuantity> productQuantityList = orderInput.getOrderProductQuantityList();
 
         for (OrderProductQuantity productQuantity : productQuantityList) {
@@ -46,7 +49,11 @@ public class OrderDetailsService {
                     product,
                     user
             );
-
+            //empty the cart
+            if (!isCartCheckout) {
+                List<Cart> carts = cartDao.findByUser(user);
+                cartDao.deleteAll(carts);
+            }
             orderDetailsDao.save(orderDetails);
 
         }
