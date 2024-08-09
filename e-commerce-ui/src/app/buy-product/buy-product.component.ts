@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class BuyProductComponent implements OnInit {
   productdetails: Product[] = [];
+  isCartCheckout: boolean = false;
   errorMessage: string | null = null;
   isLoading = false;
 
@@ -32,6 +33,10 @@ export class BuyProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productdetails = this.activatedRoute.snapshot.data['productdetails'];
+    const isCartCheckoutStr = this.activatedRoute.snapshot.paramMap.get(
+      'isSingleProductCheckout'
+    );
+    this.isCartCheckout = isCartCheckoutStr === 'true';
     this.productdetails.forEach((product) =>
       this.orderDetails.orderProductQuantityList.push({
         productId: product.productId,
@@ -42,19 +47,21 @@ export class BuyProductComponent implements OnInit {
 
   public placeOrder(orderForm: NgForm) {
     this.isLoading = true;
-    this.productService.placeOrder(this.orderDetails).subscribe({
-      next: (response) => {
-        orderForm.reset();
-        this.router.navigate(['/orderConfirm']);
-      },
-      error: (error: HttpErrorResponse) => {
-        console.error('Order placement failed:', error);
-        this.errorMessage = 'Failed to place the order. Please try again.';
-      },
-      complete: () => {
-        this.isLoading = false;
-      },
-    });
+    this.productService
+      .placeOrder(this.orderDetails, this.isCartCheckout)
+      .subscribe({
+        next: (response) => {
+          orderForm.reset();
+          this.router.navigate(['/orderConfirm']);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Order placement failed:', error);
+          this.errorMessage = 'Failed to place the order. Please try again.';
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
   }
 
   getQuantityForProduct(productId: number) {
