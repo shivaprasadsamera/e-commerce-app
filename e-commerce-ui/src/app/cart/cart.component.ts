@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { OrderDetails } from '../model/order-details.model';
-import { Product } from '../model/product.model';
-import { ActivatedRoute } from '@angular/router';
-import { OrderQuantity } from '../model/order-quantity.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -14,14 +11,14 @@ import { OrderQuantity } from '../model/order-quantity.model';
 export class CartComponent implements OnInit {
   displayedColumns: string[] = [
     'productName',
-    'quantity',
-    'price',
-    'total',
+    'description',
+    'actualPrice',
+    'discountedPrice',
     'actions',
   ];
   cartDetails: any[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.getCartDetails();
@@ -30,12 +27,7 @@ export class CartComponent implements OnInit {
   getCartDetails() {
     return this.productService.getCartDetails().subscribe({
       next: (response: any) => {
-        console.log(response);
-        this.cartDetails = response.map((item: any) => ({
-          ...item,
-          quantity: item.quantity || 0,
-          total: this.calculateTotal(item),
-        }));
+        this.cartDetails = response;
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error fetching cart details:', error);
@@ -45,19 +37,23 @@ export class CartComponent implements OnInit {
       },
     });
   }
-  handleQuantityChange(event: any, index: number) {
-    const newQuantity = +event.target.value;
-    this.cartDetails[index].quantity = newQuantity;
-    this.cartDetails[index].total = this.calculateTotal(
-      this.cartDetails[index]
-    );
+
+  onCheckout() {
+    this.router.navigate([
+      '/buyProduct',
+      { isSingleProductCheckout: false, id: 0 },
+    ]);
   }
 
-  calculateTotal(item: any): number {
-    if (this.cartDetails.length === 1 || item.quantity === 1) {
-      return item.product.productDiscountedPrice;
-    } else {
-      return item.quantity * item.product.productDiscountedPrice;
-    }
+  deleteCartItem(cartId: number) {
+    this.productService.deleteCartItem(cartId).subscribe({
+      next: (response) => {
+        this.getCartDetails();
+        alert(`Cart item is removed successfully!`);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+      },
+    });
   }
 }
