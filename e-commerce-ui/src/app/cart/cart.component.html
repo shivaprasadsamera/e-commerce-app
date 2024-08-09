@@ -8,25 +8,25 @@
       </mat-cell>
     </ng-container>
 
-    <!-- Quantity Column -->
-    <ng-container matColumnDef="quantity">
-      <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
-      <mat-cell *matCellDef="let element; let i = index">
-        <select
-          [value]="element.quantity"
-          (change)="handleQuantityChange($event, i)"
-          class="form-select"
-        >
-          <option *ngFor="let qty of [1, 2, 3, 4, 5]" [value]="qty">
-            {{ qty }}
-          </option>
-        </select>
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell class="d-inline-block text-truncate" *matCellDef="let element"
+        >{{ element.product.productDescription }} 
       </mat-cell>
     </ng-container>
 
-    <!-- Price Column -->
-    <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+    <!-- actualdPrice Column -->
+    <ng-container matColumnDef="actualPrice">
+      <mat-header-cell *matHeaderCellDef>Actual Price </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.product.productActualPrice | currency : "INR" : "symbol" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- discountedPrice Column -->
+    <ng-container matColumnDef="discountedPrice">
+      <mat-header-cell *matHeaderCellDef>Discounted Price </mat-header-cell>
       <mat-cell *matCellDef="let element">
         {{
           element.product.productDiscountedPrice | currency : "INR" : "symbol"
@@ -34,19 +34,17 @@
       </mat-cell>
     </ng-container>
 
-    <!-- Total Column -->
-    <ng-container matColumnDef="total">
-      <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{ element.total | currency : "INR" : "symbol" }}
-      </mat-cell>
-    </ng-container>
-
     <!-- Actions Column (optional, e.g., Remove from Cart) -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-button color="warn">Remove</button>
+        <button
+          mat-button
+          color="warn"
+          (click)="deleteCartItem(element.cartId)"
+        >
+          Remove
+        </button>
       </mat-cell>
     </ng-container>
 
@@ -54,4 +52,11 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
+
+  <!-- Checkout Button -->
+  <div class="checkout-container mt-3 d-flex justify-content-center">
+    <button mat-raised-button color="primary" (click)="onCheckout()">
+      Checkout
+    </button>
+  </div>
 </div>
