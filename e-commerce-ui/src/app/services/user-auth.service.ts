@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -6,48 +7,35 @@ import { Injectable, OnInit } from '@angular/core';
 export class UserAuthService implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {}
 
-  /**
-   * setRoles
-   */
+  // setRoles
   public setRoles(roles: []) {
     localStorage.setItem('roles', JSON.stringify(roles));
   }
 
-  /**
-   * getRoles
-   */
+  // getRoles
+
   public getRoles(): [] {
     return JSON.parse(localStorage.getItem('roles') || '[]');
   }
 
-  /**
-   * setToken
-   */
+  // setToken
   public setToken(jwtToken: string) {
     localStorage.setItem('jwtToken', jwtToken);
   }
 
-  /**
-   * getToken
-   */
+  // getToken
   public getToken(): string | null {
     return localStorage.getItem('jwtToken');
   }
 
-  /**
-   * clear
-   */
+  // clear
   public clear() {
     localStorage.clear();
   }
 
-  /**
-   * isLoggedIn
-   */
+  // isLoggedIn
 
   public isLoggedIn() {
     const roles = this.getRoles();
