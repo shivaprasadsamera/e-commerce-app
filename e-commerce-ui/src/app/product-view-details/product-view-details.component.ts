@@ -38,7 +38,7 @@ export class ProductViewDetailsComponent implements OnInit {
   addToCart(productId: number) {
     this.productService.addToCart(productId).subscribe({
       next: (response: any) => {
-        console.log(response);
+        // console.log(response);
       },
       error: (error: HttpErrorResponse) => {
         console.log('Error: ', error);
