@@ -1,0 +1,140 @@
+<div class="container m-3">
+  <div class="orderstable-heading p-2">
+    <h1>Orders's Details</h1>
+  </div>
+  <!-- Filter Buttons -->
+  <div class="filter-btns mb-2">
+    <mat-button-toggle-group
+    #group="matButtonToggleGroup"
+    value="all"
+    (change)="applyFilter(group.value)"
+  >
+    <mat-button-toggle value="all">All</mat-button-toggle>
+    <mat-button-toggle value="placed">Placed</mat-button-toggle>
+    <mat-button-toggle value="delivered">Delivered</mat-button-toggle>
+  </mat-button-toggle-group>
+  </div>
+
+  <!-- Orders Table -->
+  <mat-table [dataSource]="filteredOrders" class="mat-elevation-z8 ">
+    <!-- Order ID Column -->
+    <ng-container matColumnDef="orderId">
+      <mat-header-cell *matHeaderCellDef> Order ID </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.orderId }} </mat-cell>
+    </ng-container>
+
+    <!-- Full Name Column -->
+    <ng-container matColumnDef="orderFullName">
+      <mat-header-cell *matHeaderCellDef> Full Name </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.orderFullName }} </mat-cell>
+    </ng-container>
+
+    <!-- Contact Number Column -->
+    <ng-container matColumnDef="orderContactNumber">
+      <mat-header-cell *matHeaderCellDef> Contact Number </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        {{ order.orderContactNumber }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="orderAmount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let order"> ₹{{ order.orderAmount }} </mat-cell>
+    </ng-container>
+
+    <!-- Order Status Column -->
+    <ng-container matColumnDef="orderStatus">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.orderStatus }} </mat-cell>
+    </ng-container>
+
+    <!-- Product Name Column -->
+    <ng-container matColumnDef="productName">
+      <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        {{ order.product.productName }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Full Address Column -->
+    <ng-container matColumnDef="orderFullAddress">
+      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        {{ order.orderFullAddress }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Delivered Button Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Delivered </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="markAsDelivered(order.orderId)"
+          [disabled]="order.orderStatus === 'Delivered'"
+        >
+          Delivered
+
+          <mat-icon>done_all</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15, 25]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
+
+<div class="container m-3">
+  <div class="usertable-heading p-2">
+    <h1>User's Details</h1>
+  </div>
+
+  <!-- Users Table -->
+  <mat-table [dataSource]="myOrders" class="mat-elevation-z8">
+    <!-- User ID Column -->
+    <ng-container matColumnDef="userId">
+      <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.user.userName }} </mat-cell>
+    </ng-container>
+
+    <!-- Full Name Column -->
+    <ng-container matColumnDef="userFullName">
+      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        {{ order.user.userFirstName }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="userEmail">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.user.userEmail }} </mat-cell>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="userRole">
+      <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        <span *ngFor="let role of order.user.role">{{ role.roleName }} </span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumnsUsers"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsUsers"></mat-row>
+  </mat-table>
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15, 25]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
