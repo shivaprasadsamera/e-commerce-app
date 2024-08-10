@@ -9,6 +9,8 @@ import com.ecommerce.backend.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -22,13 +24,15 @@ public class OrderDetailsService {
     private final UserDao userDao;
     private final CartDao cartDao;
     private final OrderDetailsDao orderDetailsDao;
+    private final JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    public OrderDetailsService(ProductDao productDao, UserDao userDao, CartDao cartDao, OrderDetailsDao orderDetailsDao) {
+    public OrderDetailsService(ProductDao productDao, UserDao userDao, CartDao cartDao, OrderDetailsDao orderDetailsDao, JwtRequestFilter jwtRequestFilter) {
         this.productDao = productDao;
         this.userDao = userDao;
         this.cartDao = cartDao;
         this.orderDetailsDao = orderDetailsDao;
+        this.jwtRequestFilter = jwtRequestFilter;
     }
 
     public void placeOrder(OrderInput orderInput, boolean isCartCheckout){
@@ -58,5 +62,29 @@ public class OrderDetailsService {
 
         }
 
+    }
+
+    public List<OrderDetails> getMyOrders(){
+        String currentUser = jwtRequestFilter.CURRENT_USER;
+        User user = userDao.findById(currentUser)
+                .orElseThrow(() -> new NoSuchElementException("User not found with id: " + currentUser));
+        return orderDetailsDao.findByUser(user);
+    }
+
+    public List<OrderDetails> getAllUsersOrders(){
+        List<OrderDetails> orderDetailsList = new ArrayList<>();
+        orderDetailsDao.findAll().forEach(orderDetailsList::add);
+
+        return orderDetailsList;
+    }
+
+    public void markAsDelivered(Integer orderId){
+        OrderDetails orderDetails = orderDetailsDao.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order not found with ID: " + orderId));
+
+        if (orderDetails != null){
+            orderDetails.setOrderStatus("Delivered");
+            orderDetailsDao.save(orderDetails);
+        }
     }
 }
