@@ -19,6 +19,8 @@ import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.com
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { AllOrdersInfoComponent } from './all-orders-info/all-orders-info.component';
 
 const routes: Routes = [
   { path: '', title: 'Home | eShop', component: HomeComponent },
@@ -97,6 +99,20 @@ const routes: Routes = [
     component: OrderConfirmationComponent,
     canActivate: [authGuard],
     data: { roles: ['User'] },
+  },
+  {
+    path: 'myOrders',
+    title: 'myorders | eShop',
+    component: MyOrdersComponent,
+    canActivate: [authGuard],
+    data: { roles: ['User'] },
+  },
+  {
+    path: 'allOrdersInfo',
+    title: 'allorders | eShop',
+    component: AllOrdersInfoComponent,
+    canActivate: [authGuard],
+    data: { roles: ['Admin'] },
   },
   { path: 'register', component: RegisterComponent },
 ];

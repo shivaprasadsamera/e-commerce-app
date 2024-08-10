@@ -42,6 +42,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CartComponent } from './cart/cart.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { AllOrdersInfoComponent } from './all-orders-info/all-orders-info.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ContactUsComponent,
     RegisterComponent,
     CartComponent,
+    MyOrdersComponent,
+    AllOrdersInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +89,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatSidenavModule,
     MatTooltipModule,
+    MatButtonToggleModule,
   ],
   providers: [
     { provide: 'authGuard', useValue: authGuard },

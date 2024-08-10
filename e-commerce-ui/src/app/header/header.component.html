@@ -1,57 +1,90 @@
 <mat-toolbar color="primary" class="header-toolbar">
-  <span class="logo" (click)="goToHome()">e-Shop</span>
-  <span class="example-spacer"></span>
+  <!-- Logo -->
+  <span class="logo me-2" (click)="goToHome()">e-Shop</span>
+
+  <!-- Buttons to be aligned at the start -->
+  <button
+    mat-raised-button
+    class="me-2"
+    color="primary"
+    routerLink="/"
+    *ngIf="isLoggedIn()"
+  >
+    Home
+  </button>
 
   <button
     mat-raised-button
+    class="me-2"
     color="primary"
-    class="me-3"
-    type="submit"
-    *ngIf="!isLoggedIn()"
-    routerLink="/login"
+    routerLink="/myOrders"
+    *ngIf="isLoggedIn() && !isAdmin()"
   >
-    Login
+    My Orders
+  </button>
+
+  <button
+    mat-raised-button
+    class="me-2"
+    color="primary"
+    routerLink="/addNewProduct"
+    *ngIf="isLoggedIn() && isAdmin()"
+  >
+    Add New Product
+  </button>
+
+  <button
+    mat-raised-button
+    class="me-2"
+    color="primary"
+    routerLink="/showProductDetails"
+    *ngIf="isLoggedIn() && isAdmin()"
+  >
+    Show Product Details
   </button>
   <button
+    mat-raised-button
+    class="me-2"
+    color="primary"
+    routerLink="/allOrdersInfo"
+    *ngIf="isLoggedIn() && isAdmin()"
+  >
+    All Orders Info
+  </button>
+
+  <!-- Spacer to push the remaining buttons to the end -->
+  <span class="example-spacer"></span>
+
+  <!-- Cart Button (aligned at the end) -->
+  <button
     mat-icon-button
+    class="me-2"
     color="light"
     *ngIf="isLoggedIn() && !isAdmin()"
-    class="me-2"
     routerLink="/cart"
   >
     <mat-icon>shopping_cart</mat-icon>
   </button>
+
+  <!-- Login Button (aligned at the end, shown if not logged in) -->
   <button
     mat-raised-button
+    class="me-2"
+    color="primary"
+    routerLink="/login"
+    *ngIf="!isLoggedIn()"
+  >
+    Login
+  </button>
+
+  <!-- Logout Button (aligned at the end, shown if logged in) -->
+  <button
+    mat-raised-button
+    class="me-2"
     color="warn"
     *ngIf="isLoggedIn()"
-    type="submit"
     (click)="logout()"
   >
     Logout
-  </button>
-</mat-toolbar>
-
-<mat-toolbar color="primary" *ngIf="isLoggedIn()">
-  <button mat-raised-button color="primary" class="me-3" routerLink="/">
-    Home
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    class="me-3"
-    routerLink="/addNewProduct"
-    *ngIf="isAdmin()"
-  >
-    AddNewProduct
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    class="me-3"
-    routerLink="/showProductDetails"
-    *ngIf="isAdmin()"
-  >
-    ShowProductDetails
   </button>
 </mat-toolbar>
