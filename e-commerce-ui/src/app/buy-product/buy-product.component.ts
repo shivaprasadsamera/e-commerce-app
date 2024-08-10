@@ -46,6 +46,10 @@ export class BuyProductComponent implements OnInit {
   }
 
   public placeOrder(orderForm: NgForm) {
+    if (orderForm.invalid) {
+      this.errorMessage = 'Please fill out the form correctly.';
+      return;
+    }
     this.isLoading = true;
     this.productService
       .placeOrder(this.orderDetails, this.isCartCheckout)
