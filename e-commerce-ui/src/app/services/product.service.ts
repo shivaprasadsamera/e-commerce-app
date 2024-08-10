@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../model/product.model';
 import { OrderDetails } from '../model/order-details.model';
 import { Observable, throwError } from 'rxjs';
+import { MyOrders } from '../model/my-orders.model';
 
 @Injectable({
   providedIn: 'root',
@@ -73,6 +74,24 @@ export class ProductService {
   public deleteCartItem(cartId: number) {
     return this.httpClient.delete(
       'http://localhost:8585/api/cart/deleteCartItem/' + cartId
+    );
+  }
+
+  public getMyOrders(): Observable<MyOrders[]> {
+    return this.httpClient.get<MyOrders[]>(
+      'http://localhost:8585/api/orders/getMyOrders'
+    );
+  }
+
+  public getAllUsersOrders(): Observable<MyOrders[]> {
+    return this.httpClient.get<MyOrders[]>(
+      'http://localhost:8585/api/orders/getAllUsersOrders'
+    );
+  }
+
+  public markAsDelivered(orderId: number) {
+    return this.httpClient.get(
+      'http://localhost:8585/api/orders/markAsDelivered/' + orderId
     );
   }
 
