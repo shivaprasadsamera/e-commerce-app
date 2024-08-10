@@ -1,0 +1,55 @@
+<div class="caontainer m-3">
+  <mat-table [dataSource]="myOrders" class="mat-elevation-z8">
+    <!-- Order ID Column -->
+    <ng-container matColumnDef="orderId">
+      <mat-header-cell *matHeaderCellDef> Order ID </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.orderId }} </mat-cell>
+    </ng-container>
+
+    <!-- Full Name Column -->
+    <ng-container matColumnDef="orderFullName">
+      <mat-header-cell *matHeaderCellDef> Full Name </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.orderFullName }} </mat-cell>
+    </ng-container>
+
+    <!-- Contact Number Column -->
+    <ng-container matColumnDef="orderContactNumber">
+      <mat-header-cell *matHeaderCellDef> Contact Number </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        {{ order.orderContactNumber }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="orderAmount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let order"> ₹{{ order.orderAmount }} </mat-cell>
+    </ng-container>
+
+    <!-- Order Status Column -->
+    <ng-container matColumnDef="orderStatus">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.orderStatus }} </mat-cell>
+    </ng-container>
+
+    <!-- Product Name Column -->
+    <ng-container matColumnDef="productName">
+      <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        {{ order.product.productName }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Full Address Column -->
+    <ng-container matColumnDef="orderFullAddress">
+      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        {{ order.orderFullAddress }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
