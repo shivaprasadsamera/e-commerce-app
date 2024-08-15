@@ -8,10 +8,11 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-all-orders-info',
   templateUrl: './all-orders-info.component.html',
-  styleUrl: './all-orders-info.component.css',
+  styleUrls: ['./all-orders-info.component.css'],
 })
 export class AllOrdersInfoComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild('paginator1') paginator1: MatPaginator | undefined;
+  @ViewChild('paginator2') paginator2: MatPaginator | undefined;
   myOrders = new MatTableDataSource<MyOrders>([]);
   filteredOrders = new MatTableDataSource<MyOrders>([]);
   displayedColumns: string[] = [
@@ -36,8 +37,12 @@ export class AllOrdersInfoComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    if (this.paginator) {
-      this.filteredOrders.paginator = this.paginator;
+    if (this.paginator1) {
+      this.filteredOrders.paginator = this.paginator1;
+    }
+
+    if (this.paginator2) {
+      this.myOrders.paginator = this.paginator2;
     }
   }
 
@@ -46,6 +51,13 @@ export class AllOrdersInfoComponent implements OnInit {
       next: (response: MyOrders[]) => {
         this.myOrders.data = response;
         this.filteredOrders.data = response;
+        if (this.paginator1) {
+          this.filteredOrders.paginator = this.paginator1;
+        }
+
+        if (this.paginator2) {
+          this.myOrders.paginator = this.paginator2;
+        }
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);
@@ -62,7 +74,7 @@ export class AllOrdersInfoComponent implements OnInit {
       );
     }
 
-    if (this.paginator) {
+    if (this.paginator1) {
       this.filteredOrders.paginator!.firstPage();
     }
   }

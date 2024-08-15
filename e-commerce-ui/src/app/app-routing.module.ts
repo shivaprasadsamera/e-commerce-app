@@ -21,6 +21,9 @@ import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AllOrdersInfoComponent } from './all-orders-info/all-orders-info.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { ContactedUsersComponent } from './contacted-users/contacted-users.component';
+import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
 
 const routes: Routes = [
   { path: '', title: 'Home | eShop', component: HomeComponent },
@@ -114,7 +117,22 @@ const routes: Routes = [
     canActivate: [authGuard],
     data: { roles: ['Admin'] },
   },
+  {
+    path: 'allUsers',
+    title: 'allusers | eShop',
+    component: AllUsersComponent,
+    canActivate: [authGuard],
+    data: { roles: ['Admin'] },
+  },
+  {
+    path: 'contactedUsers',
+    title: 'contactedusers | eShop',
+    component: ContactedUsersComponent,
+    canActivate: [authGuard],
+    data: { roles: ['Admin'] },
+  },
   { path: 'register', component: RegisterComponent },
+  { path: 'imageGallery', component: ImageGalleryComponent },
 ];
 
 @NgModule({

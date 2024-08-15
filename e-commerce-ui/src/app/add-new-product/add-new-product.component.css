@@ -46,6 +46,10 @@
   height: auto;
 }
 
+.image-remove-btn{
+  cursor: pointer;
+}
+
 /* Media queries for responsiveness */
 @media (max-width: 767px) {
   .col-md-6 {

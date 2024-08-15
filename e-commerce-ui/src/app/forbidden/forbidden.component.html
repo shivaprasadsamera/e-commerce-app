@@ -1,13 +1,23 @@
-<div
-  class="conatiner mt-3 p-3 d-flex justify-content-center align-items-center"
->
-  <div class="card text-center p-3 w-50 bg-dark text-light">
-    <h2>403 - ACCESS DENIED</h2>
-    <div class="mb-3">Oops, You don't have permission to access this page.</div>
-    <div class="buttons">
-      <button type="button" class="btn btn-primary" routerLink="/">
-        Go to Home
-      </button>
-    </div>
+<div class="forbidden-page">
+  <div class="content-wrapper">
+    <mat-card class="forbidden-card">
+      <mat-card-content>
+        <div class="icon-wrapper">
+          <mat-icon class="forbidden-icon">lock</mat-icon>
+        </div>
+        <h1 class="title">403 Forbidden</h1>
+        <p class="message">Access Denied</p>
+        <p class="description">
+          You do not have the necessary permissions to view this page. If you believe this is an error, please contact the administrator.
+        </p>
+        <div class="action-buttons">
+          <button mat-raised-button color="primary" routerLink="/">Go to Homepage <mat-icon>keyboard_double_arrow_right</mat-icon></button> 
+          <button mat-stroked-button color="accent" routerLink="/contactUs">Contact Support</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
+  <footer class="footer">
+    <a href="/privacyPolicy">Privacy Policy</a> | <a href="/termsOfService">Terms of Service</a>
+  </footer>
 </div>

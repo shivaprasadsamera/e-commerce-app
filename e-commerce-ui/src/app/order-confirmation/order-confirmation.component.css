@@ -1,0 +1,9 @@
+.order-status-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  mat-stepper {
+    background: transparent;
+  }

@@ -43,10 +43,13 @@
         </div>
         <div class="mt-3 product-pricing">
           <p class="discounted-price">
-            <strong>&#8377; {{ product.productDiscountedPrice }}</strong>
+            <strong
+              >&#8377;
+              {{ product.productDiscountedPrice | indianNumber }}</strong
+            >
           </p>
           <p class="original-price text-secondary">
-            &#8377; <s>{{ product.productActualPrice }}</s>
+            &#8377; <s>{{ product.productActualPrice | indianNumber }}</s>
           </p>
         </div>
 

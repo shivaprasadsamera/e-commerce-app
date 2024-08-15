@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../model/product.model';
 import { ProductService } from '../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-buy-product',
@@ -22,6 +23,9 @@ export class BuyProductComponent implements OnInit {
     fullAddress: '',
     contactNumber: '',
     alternateContactNumber: '',
+    razorpay_payment_id: '',
+    razorpay_order_id: '',
+    razorpay_signature: '',
     orderProductQuantityList: [],
   };
 
@@ -100,5 +104,72 @@ export class BuyProductComponent implements OnInit {
       grandTotal = grandTotal + productPrice * productQuantity.quantity;
     });
     return grandTotal;
+  }
+
+  createTransactionAndPlaceOrder(orderForm: NgForm) {
+    const grandTotal = this.getCalculatedGrandTotal();
+    this.productService.createTransaction(grandTotal).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.openTransactionModel(response, orderForm);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('Payment failed', error);
+      },
+    });
+  }
+
+  openTransactionModel(response: any, orderForm: NgForm) {
+    const options: RazorpayOptions = {
+      order_id: response.orderId,
+      key: response.razorpayKeyId,
+      amount: response.amount,
+      currency: response.currency,
+      name: 'e-Shop a shop for all',
+      description: 'Test Transaction',
+      image: 'https://www.reshot.com/free-svg-icons/item/wallet-Z2XGC5U6P4/',
+      handler: (response: any) => {
+        // Handle successful payment here
+        if (
+          response &&
+          response.razorpay_payment_id &&
+          response.razorpay_order_id &&
+          response.razorpay_signature
+        ) {
+          this.paymentResponse(response, orderForm);
+          alert('Payment Successful');
+          // console.log('Payment Successful');
+          // console.log('Payment ID:', response.razorpay_payment_id);
+          // console.log('Order ID:', response.razorpay_order_id);
+          // console.log('Signature:', response.razorpay_signature);
+        } else {
+          alert('Payment failed!...');
+        }
+      },
+      prefill: {
+        name: 'e-Shop a shop for all',
+        email: 'e.shop@example.com',
+        contact: '9999999999',
+      },
+      notes: {
+        address: 'Online Shopping',
+      },
+      theme: {
+        color: '#3399cc',
+      },
+    };
+    if (window.Razorpay) {
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } else {
+      console.error('Razorpay script not loaded');
+    }
+  }
+
+  paymentResponse(response: any, orderForm: NgForm) {
+    this.orderDetails.razorpay_payment_id = response.razorpay_payment_id;
+    this.orderDetails.razorpay_order_id = response.razorpay_order_id;
+    this.orderDetails.razorpay_signature = response.razorpay_signature;
+    this.placeOrder(orderForm);
   }
 }

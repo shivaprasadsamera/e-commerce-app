@@ -1,90 +1,146 @@
-<mat-toolbar color="primary" class="header-toolbar">
-  <!-- Logo -->
-  <span class="logo me-2" (click)="goToHome()">e-Shop</span>
+<div class="header conainer-fluid">
+  <mat-toolbar class="header-toolbar">
+    <!-- Logo -->
+    <span class="logo " (click)="goToHome()">e-Shop</span>
 
-  <!-- Buttons to be aligned at the start -->
-  <button
-    mat-raised-button
-    class="me-2"
-    color="primary"
-    routerLink="/"
-    *ngIf="isLoggedIn()"
-  >
-    Home
-  </button>
+    <!-- Spacer to push items to the end -->
+    <span class="example-spacer"></span>
 
-  <button
-    mat-raised-button
-    class="me-2"
-    color="primary"
-    routerLink="/myOrders"
-    *ngIf="isLoggedIn() && !isAdmin()"
-  >
-    My Orders
-  </button>
+    <!-- Responsive Toggle Button -->
+    <button
+      mat-icon-button
+      class="menu-button"
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
 
-  <button
-    mat-raised-button
-    class="me-2"
-    color="primary"
-    routerLink="/addNewProduct"
-    *ngIf="isLoggedIn() && isAdmin()"
-  >
-    Add New Product
-  </button>
+    <!-- Buttons for Navigation and Actions -->
+    <div class="toolbar-buttons">
+      <!-- Home Button -->
+      <button
+        mat-raised-button
+        routerLink="/"
+        *ngIf="isLoggedIn()"
+      >
+        <mat-icon>home</mat-icon> Home
+      </button>
 
-  <button
-    mat-raised-button
-    class="me-2"
-    color="primary"
-    routerLink="/showProductDetails"
-    *ngIf="isLoggedIn() && isAdmin()"
-  >
-    Show Product Details
-  </button>
-  <button
-    mat-raised-button
-    class="me-2"
-    color="primary"
-    routerLink="/allOrdersInfo"
-    *ngIf="isLoggedIn() && isAdmin()"
-  >
-    All Orders Info
-  </button>
+      <!-- My Orders Button (Visible only for regular users) -->
+      <button
+        mat-raised-button
+        routerLink="/myOrders"
+        *ngIf="isLoggedIn() && !isAdmin()"
+      >
+        My Orders
+      </button>
 
-  <!-- Spacer to push the remaining buttons to the end -->
-  <span class="example-spacer"></span>
+      <button
+        mat-raised-button
+        routerLink="/imageGallery"
+        *ngIf="isLoggedIn()"
+      >
+        Gallery
+      </button>
 
-  <!-- Cart Button (aligned at the end) -->
-  <button
-    mat-icon-button
-    class="me-2"
-    color="light"
-    *ngIf="isLoggedIn() && !isAdmin()"
-    routerLink="/cart"
-  >
-    <mat-icon>shopping_cart</mat-icon>
-  </button>
+      <!-- Admin Actions -->
+      <ng-container *ngIf="isLoggedIn() && isAdmin()">
+        <!-- Add New Product Button -->
+        <button
+          mat-raised-button
+          routerLink="/addNewProduct"
+        >
+          Add New Product
+        </button>
+        
 
-  <!-- Login Button (aligned at the end, shown if not logged in) -->
-  <button
-    mat-raised-button
-    class="me-2"
-    color="primary"
-    routerLink="/login"
-    *ngIf="!isLoggedIn()"
-  >
-    Login
-  </button>
+        <!-- Show Product Details Button -->
+        <button
+          mat-raised-button
+          routerLink="/showProductDetails"
+        >
+          Show Product Details
+        </button>
 
-  <!-- Logout Button (aligned at the end, shown if logged in) -->
-  <button
-    mat-raised-button
-    class="me-2"
-    color="warn"
-    *ngIf="isLoggedIn()"
-    (click)="logout()"
-  >
-    Logout
-  </button>
-</mat-toolbar>
+        <!-- All Orders Info Button -->
+        <button
+          mat-raised-button
+          routerLink="/allOrdersInfo"
+        >
+          All Orders Info
+        </button>
+
+        <!-- All Users Button (Admin only) -->
+        <button
+          mat-raised-button
+          routerLink="/allUsers"
+        >
+          All Users <mat-icon>group_add</mat-icon>
+        </button>
+        <!-- All Users Button For Contact us Form(Admin only) -->
+        <button
+          mat-raised-button
+          routerLink="/contactedUsers"
+        >
+          Contacted Users
+        </button>
+      </ng-container>
+
+      <!-- Cart Button (Visible for logged-in users) -->
+      <button
+        mat-icon-button
+        *ngIf="isLoggedIn() && !isAdmin()"
+        routerLink="/cart"
+      >
+        <mat-icon>add_shopping_cart</mat-icon>
+      </button>
+
+      <!-- Conditional Buttons for Authentication -->
+      <ng-container *ngIf="isLoggedIn(); else loginLink">
+        <!-- Logout Button -->
+        <button mat-raised-button (click)="logout()">
+          Logout <mat-icon>logout</mat-icon>
+        </button>
+      </ng-container>
+
+      <!-- Login Button (Visible for users not logged in) -->
+      <ng-template #loginLink>
+        <button
+          mat-raised-button
+          routerLink="/login"
+        >
+          Login <mat-icon>login</mat-icon>
+        </button>
+      </ng-template>
+    </div>
+
+    <!-- Responsive Menu -->
+    <mat-menu #menu="matMenu">
+      <ng-container *ngIf="isLoggedIn()">
+        <button mat-menu-item routerLink="/">Home</button>
+        <button mat-menu-item routerLink="/myOrders" *ngIf="!isAdmin()">
+          My Orders
+        </button>
+        <ng-container *ngIf="isAdmin()">
+          <button mat-menu-item routerLink="/addNewProduct">
+            Add New Product
+          </button>
+          <button mat-menu-item routerLink="/showProductDetails">
+            Show Product Details
+          </button>
+          <button mat-menu-item routerLink="/allOrdersInfo">
+            All Orders Info
+          </button>
+          <button mat-menu-item routerLink="/allUsers">All Users</button>
+        </ng-container>
+        <button mat-menu-item routerLink="/cart" *ngIf="!isAdmin()">
+          Cart
+        </button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </ng-container>
+      <button mat-menu-item routerLink="/login" *ngIf="!isLoggedIn()">
+        Login
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</div>

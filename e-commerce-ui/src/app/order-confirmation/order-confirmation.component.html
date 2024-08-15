@@ -4,26 +4,49 @@
       <p>{{ orderPlacedMessage }}</p>
       <p>{{ arrivalTime }}</p>
     </div>
+    <mat-card class="order-status-card" >
+      <mat-card-header>
+        <mat-card-title>Order Status</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-horizontal-stepper [linear]="true">
+          <mat-step label="Order Placed" [completed]="isAdmin">
+            <p>Your order has been placed successfully.</p>
+          </mat-step>
+          <mat-step label="Processing" [completed]="isAdmin">
+            <p>Your order is being processed.</p>
+          </mat-step>
+          <mat-step label="Shipped" [completed]="isAdmin">
+            <p>Your order has been shipped.</p>
+          </mat-step>
+          <mat-step label="Delivered" [completed]="isAdmin">
+            <p>Your order has been delivered.</p>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </mat-card-content>
+    </mat-card>
     <div class="home-btn">
       <button
-        mat-mini-fab
+        mat-stroked-button
         aria-label="Go to Home"
         color="primary"
         (click)="goToHome()"
-      >
-        <mat-icon>home</mat-icon>
+      > Home
+      <mat-icon>keyboard_double_arrow_right</mat-icon>
       </button>
     </div>
     <div class="my-orders p-3">
       <button
-      mat-stroked-button
-      aria-label="Go to Home"
-      color="primary"
-      routerLink="/myOrders"
-    >
-      My Orders
-      <mat-icon>keyboard_double_arrow_right</mat-icon>
-    </button>
+        mat-stroked-button
+        aria-label="Go to Home"
+        color="primary"
+        routerLink="/myOrders"
+      >
+        My Orders
+        <mat-icon>keyboard_double_arrow_right</mat-icon>
+      </button>
     </div>
+
+   
   </div>
 </div>

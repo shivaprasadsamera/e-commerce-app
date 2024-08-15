@@ -9,7 +9,7 @@ import { MyOrders } from '../model/my-orders.model';
   providedIn: 'root',
 })
 export class ProductService {
-  API_PATH = 'http://localhost:8585';
+  private apiUrl = 'http://localhost:8585';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -92,6 +92,12 @@ export class ProductService {
   public markAsDelivered(orderId: number) {
     return this.httpClient.get(
       'http://localhost:8585/api/orders/markAsDelivered/' + orderId
+    );
+  }
+
+  public createTransaction(amount: number) {
+    return this.httpClient.get(
+      'http://localhost:8585/api/orders/createTransaction/' + amount
     );
   }
 

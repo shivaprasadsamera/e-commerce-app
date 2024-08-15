@@ -20,6 +20,6 @@ export class ShowProductImagesDialogComponent implements OnInit {
   }
 
   receiveImages() {
-    console.log(this.data);
+    // console.log(this.data);
   }
 }

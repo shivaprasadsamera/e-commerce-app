@@ -17,8 +17,6 @@ export class HomeComponent implements OnInit {
 
   hasMore: boolean = false;
 
-  cols?: number;
-
   constructor(
     private productService: ProductService,
     private imageProcessingService: ImageProcessingService,
@@ -27,26 +25,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    this.updateGridCols();
-    // window.addEventListener('resize', this.updateGridCols.bind(this));
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.updateGridCols();
-  }
-
-  updateGridCols() {
-    const width = window.innerWidth;
-    if (width < 600) {
-      this.cols = 1;
-    } else if (width < 900) {
-      this.cols = 2;
-    } else if (width < 1200) {
-      this.cols = 3;
-    } else {
-      this.cols = 3;
-    } 
   }
 
   public loadMoreProducts() {
@@ -72,7 +50,7 @@ export class HomeComponent implements OnInit {
       )
       .subscribe({
         next: (response: Product[]) => {
-          if (response.length == 9) {
+          if (response.length == 12) {
             this.hasMore = true;
           } else {
             this.hasMore = false;
@@ -80,7 +58,7 @@ export class HomeComponent implements OnInit {
           response.forEach((product) => this.productDetails.push(product));
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          console.log('Error fetching products:', error);
         },
       });
   }
@@ -91,5 +69,18 @@ export class HomeComponent implements OnInit {
 
   privacyPolicy() {
     this.router.navigate(['/orderConfirm']);
+  }
+  showScrollTopButton = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.showScrollTopButton = window.scrollY > 300;
+  }
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 }

@@ -5,18 +5,18 @@
   <!-- Filter Buttons -->
   <div class="filter-btns mb-2">
     <mat-button-toggle-group
-    #group="matButtonToggleGroup"
-    value="all"
-    (change)="applyFilter(group.value)"
-  >
-    <mat-button-toggle value="all">All</mat-button-toggle>
-    <mat-button-toggle value="placed">Placed</mat-button-toggle>
-    <mat-button-toggle value="delivered">Delivered</mat-button-toggle>
-  </mat-button-toggle-group>
+      #group="matButtonToggleGroup"
+      value="all"
+      (change)="applyFilter(group.value)"
+    >
+      <mat-button-toggle value="all">All</mat-button-toggle>
+      <mat-button-toggle value="placed">Placed</mat-button-toggle>
+      <mat-button-toggle value="delivered">Delivered</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
 
   <!-- Orders Table -->
-  <mat-table [dataSource]="filteredOrders" class="mat-elevation-z8 ">
+  <mat-table [dataSource]="filteredOrders" class="mat-elevation-z8">
     <!-- Order ID Column -->
     <ng-container matColumnDef="orderId">
       <mat-header-cell *matHeaderCellDef> Order ID </mat-header-cell>
@@ -87,6 +87,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
   <mat-paginator
+    #paginator1
     [pageSize]="5"
     [pageSizeOptions]="[5, 10, 15, 25]"
     showFirstLastButtons
@@ -133,6 +134,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumnsUsers"></mat-row>
   </mat-table>
   <mat-paginator
+    #paginator2
     [pageSize]="5"
     [pageSizeOptions]="[5, 10, 15, 25]"
     showFirstLastButtons

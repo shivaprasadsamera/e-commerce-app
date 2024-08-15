@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-grid-list cols="2" rowHeight="2:1" class="p-3 m-3">
+  <mat-grid-list cols="2" rowHeight="2:1" class="p-3 m-3" gutterSize="10">
     <mat-grid-tile *ngFor="let fileHandle of data.images">
       <img
         [src]="fileHandle.url"

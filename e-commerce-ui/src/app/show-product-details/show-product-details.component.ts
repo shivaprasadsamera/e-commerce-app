@@ -58,7 +58,7 @@ export class ShowProductDetailsComponent implements OnInit {
       .subscribe({
         next: (response: Product[]) => {
           this.productDetails = response;
-          if (response.length == 9) {
+          if (response.length == 12) {
             this.hasMore = true;
           } else {
             this.hasMore = false;

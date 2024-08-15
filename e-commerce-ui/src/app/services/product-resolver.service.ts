@@ -24,13 +24,11 @@ export class ProductResolverService implements Resolve<Product> {
     const id: any = route.paramMap.get('productId');
 
     if (id) {
-      return this.productService
-        .getProductDetailsById(id)
-        .pipe(
-          map((product: Product) =>
-            this.imageProcessingService.createImages(product)
-          )
-        );
+      return this.productService.getProductDetailsById(id).pipe(
+        map((product: Product) => {
+          return this.imageProcessingService.createImages(product);
+        })
+      );
     } else {
       return of(this.getProductDetails());
     }
@@ -44,6 +42,7 @@ export class ProductResolverService implements Resolve<Product> {
       productDiscountedPrice: 0,
       productActualPrice: 0,
       productImages: [],
+      category: null,
     };
   }
 }

@@ -45,6 +45,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AllOrdersInfoComponent } from './all-orders-info/all-orders-info.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatCardModule } from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+import { ContactedUsersComponent } from './contacted-users/contacted-users.component';
+import { IndianNumberPipe } from './custom-pipes/indian-number.pipe';
+import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -69,6 +77,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     CartComponent,
     MyOrdersComponent,
     AllOrdersInfoComponent,
+    AllUsersComponent,
+    ContactedUsersComponent,
+    IndianNumberPipe,
+    ImageGalleryComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +102,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatSidenavModule,
     MatTooltipModule,
     MatButtonToggleModule,
+    MatStepperModule,
+    MatCardModule,
+    MatSelectModule,
+    MatSliderModule
   ],
   providers: [
     { provide: 'authGuard', useValue: authGuard },
