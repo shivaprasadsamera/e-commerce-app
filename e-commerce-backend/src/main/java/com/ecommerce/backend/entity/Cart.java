@@ -2,6 +2,7 @@ package com.ecommerce.backend.entity;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table
 public class Cart {

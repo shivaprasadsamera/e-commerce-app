@@ -2,6 +2,7 @@ package com.ecommerce.backend.dao;
 
 import com.ecommerce.backend.entity.Product;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public interface ProductDao extends CrudRepository<Product, Integer> {
     List<Product> findAll(Pageable pageable);
 
+    @EntityGraph(attributePaths = "productImages")
     List<Product> findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(
             String key1, String key2, Pageable pageable
     );

@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleService {
 
+    private final RoleDao roleDao;
+
     @Autowired
-    private RoleDao roleDao;
+    public RoleService(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
 
 
     public Role createNewRole(Role role) {

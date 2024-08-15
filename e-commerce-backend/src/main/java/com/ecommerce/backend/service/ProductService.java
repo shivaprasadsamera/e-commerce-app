@@ -7,12 +7,14 @@ import com.ecommerce.backend.dao.UserDao;
 import com.ecommerce.backend.entity.Cart;
 import com.ecommerce.backend.entity.Product;
 import com.ecommerce.backend.entity.User;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,22 +34,23 @@ public class ProductService {
         this.cartDao = cartDao;
     }
 
-    public Product addNewProduct(Product product){
-       return productDao.save(product);
+    public Product addNewProduct(Product product) {
+        return productDao.save(product);
     }
 
-    public List<Product> getAllProducts(int pageNumber, String searchKey){
+    public List<Product> getAllProducts(int pageNumber, String searchKey) {
 
-        Pageable pageable = PageRequest.of(pageNumber,9);
-        if (searchKey.isEmpty()){
+        Pageable pageable = PageRequest.of(pageNumber, 12);
+        if (searchKey.isEmpty()) {
             return productDao.findAll(pageable);
-        }else{
-            return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(searchKey,searchKey,pageable);
+        } else {
+            return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(searchKey, searchKey, pageable);
         }
 
     }
 
-    public Product getProductDetailsById(Integer productId){
+
+    public Product getProductDetailsById(Integer productId) {
         Optional<Product> product = productDao.findById(productId);
         if (product.isPresent()) {
             return product.get();
@@ -56,18 +59,18 @@ public class ProductService {
         }
     }
 
-    public void deleteProductDetails(Integer productId){
+    public void deleteProductDetails(Integer productId) {
         productDao.deleteById(productId);
     }
 
-    public List<Product> getProductDetails(boolean isSingleProductCheckout, Integer productId){
-        if(isSingleProductCheckout){
+    public List<Product> getProductDetails(boolean isSingleProductCheckout, Integer productId) {
+        if (isSingleProductCheckout) {
             List<Product> list = new ArrayList<>();
             Product product = productDao.findById(productId)
                     .orElseThrow(() -> new EntityNotFoundException("Product not found for ID: " + productId));
             list.add(product);
             return list;
-        }else{
+        } else {
             String currentUser = JwtRequestFilter.CURRENT_USER;
             User user = userDao.findById(currentUser)
                     .orElseThrow(() -> new EntityNotFoundException("User not found for ID: " + currentUser));
@@ -76,7 +79,7 @@ public class ProductService {
             return carts.stream().map(Cart::getProduct).collect(Collectors.toList());
 
         }
-        
+
     }
 
 }

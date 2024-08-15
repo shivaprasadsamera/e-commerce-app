@@ -1,6 +1,7 @@
 package com.ecommerce.backend.entity;
 
 import javax.persistence.*;
+
 import java.util.Set;
 
 @Entity
@@ -19,10 +20,10 @@ public class Product {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "product_images",
             joinColumns = {
-            @JoinColumn(name = "product_id")},
+                    @JoinColumn(name = "product_id")},
             inverseJoinColumns = {
-            @JoinColumn(name = "image_id")
-    })
+                    @JoinColumn(name = "image_id")
+            })
     private Set<ImageModel> productImages;
 
 

@@ -2,6 +2,7 @@ package com.ecommerce.backend.entity;
 
 import javax.persistence.*;
 
+
 @Entity
 public class OrderDetails {
 
@@ -20,11 +21,15 @@ public class OrderDetails {
     @OneToOne
     private User user;
 
+    private String razorpay_payment_id;
+    private String razorpay_order_id;
+    private String razorpay_signature;
+
 
     public OrderDetails() {
     }
 
-    public OrderDetails(String orderFullName, String orderFullAddress, String orderContactNumber, String orderAlternateContactNumber, String orderStatus, Double orderAmount, Product product, User user) {
+    public OrderDetails(String orderFullName, String orderFullAddress, String orderContactNumber, String orderAlternateContactNumber, String orderStatus, Double orderAmount, Product product, User user, String razorpay_payment_id, String razorpay_order_id, String razorpay_signature) {
         this.orderFullName = orderFullName;
         this.orderFullAddress = orderFullAddress;
         this.orderContactNumber = orderContactNumber;
@@ -33,6 +38,9 @@ public class OrderDetails {
         this.orderAmount = orderAmount;
         this.product = product;
         this.user = user;
+        this.razorpay_payment_id = razorpay_payment_id;
+        this.razorpay_order_id = razorpay_order_id;
+        this.razorpay_signature = razorpay_signature;
     }
 
     public Product getProduct() {
@@ -106,4 +114,29 @@ public class OrderDetails {
     public void setOrderAmount(Double orderAmount) {
         this.orderAmount = orderAmount;
     }
+
+    public String getRazorpay_payment_id() {
+        return razorpay_payment_id;
+    }
+
+    public void setRazorpay_payment_id(String razorpay_payment_id) {
+        this.razorpay_payment_id = razorpay_payment_id;
+    }
+
+    public String getRazorpay_order_id() {
+        return razorpay_order_id;
+    }
+
+    public void setRazorpay_order_id(String razorpay_order_id) {
+        this.razorpay_order_id = razorpay_order_id;
+    }
+
+    public String getRazorpay_signature() {
+        return razorpay_signature;
+    }
+
+    public void setRazorpay_signature(String razorpay_signature) {
+        this.razorpay_signature = razorpay_signature;
+    }
+
 }

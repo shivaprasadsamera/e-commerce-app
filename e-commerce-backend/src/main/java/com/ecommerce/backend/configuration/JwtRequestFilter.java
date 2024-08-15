@@ -3,6 +3,7 @@ package com.ecommerce.backend.configuration;
 import com.ecommerce.backend.service.JwtService;
 import com.ecommerce.backend.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,24 +17,25 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    public static  String CURRENT_USER = "";
+    public static String CURRENT_USER = "";
 
     private final JwtUtil jwtUtil;
     private final JwtService jwtService;
 
     @Autowired
-    public JwtRequestFilter(JwtUtil jwtUtil,  @Lazy JwtService jwtService) {
+    public JwtRequestFilter(JwtUtil jwtUtil, @Lazy JwtService jwtService) {
         this.jwtUtil = jwtUtil;
         this.jwtService = jwtService;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, @NotNull HttpServletResponse httpServletResponse, @NotNull FilterChain filterChain) throws IOException, ServletException {
 
         final String requestTokenHeader = httpServletRequest.getHeader("Authorization");
 

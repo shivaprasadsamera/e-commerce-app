@@ -28,12 +28,15 @@ public class ProductController {
     @PreAuthorize("hasRole('Admin')")
     @PostMapping(value = "/addNewProduct" , consumes={MediaType.MULTIPART_FORM_DATA_VALUE})
     public Product addNewProduct(@RequestPart("product") Product product,
-                                 @RequestPart("imageFile") MultipartFile[] file) {
+                                 @RequestPart("imageFile") MultipartFile[] file
+                                 ) {
 
         try {
             Set<ImageModel> images = uploadImage(file);
             product.setProductImages(images);
+
             return productService.addNewProduct(product);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;

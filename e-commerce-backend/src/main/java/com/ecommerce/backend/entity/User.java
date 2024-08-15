@@ -1,6 +1,7 @@
 package com.ecommerce.backend.entity;
 
 import javax.persistence.*;
+
 import java.util.Set;
 
 @Entity
@@ -16,10 +17,10 @@ public class User {
     @JoinTable(
             name = "USER_ROLE",
             joinColumns = {
-            @JoinColumn(name = "USER_ID")
-    },
+                    @JoinColumn(name = "USER_ID")
+            },
             inverseJoinColumns = {
-            @JoinColumn(name = "ROLE_ID")
+                    @JoinColumn(name = "ROLE_ID")
             }
     )
 

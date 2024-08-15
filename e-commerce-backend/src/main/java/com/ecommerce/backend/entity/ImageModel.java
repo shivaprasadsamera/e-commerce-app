@@ -2,8 +2,9 @@ package com.ecommerce.backend.entity;
 
 import javax.persistence.*;
 
+
 @Entity
-@Table(name="image_model")
+@Table(name = "image_model")
 public class ImageModel {
 
     @Id
@@ -15,7 +16,8 @@ public class ImageModel {
     @Column(length = 50000000)
     private byte[] picByte;
 
-    public ImageModel() {}
+    public ImageModel() {
+    }
 
     public ImageModel(String name, String type, byte[] picByte) {
         this.name = name;

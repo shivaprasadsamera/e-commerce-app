@@ -4,12 +4,15 @@ import com.ecommerce.backend.dao.RoleDao;
 import com.ecommerce.backend.dao.UserDao;
 import com.ecommerce.backend.entity.Role;
 import com.ecommerce.backend.entity.User;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -27,7 +30,7 @@ public class UserService {
     }
 
 
-    public void initRolesAndUser(){
+    public void initRolesAndUser() {
         Role adminRole = new Role();
         adminRole.setRoleName("Admin");
         adminRole.setRoleDescription("This is default admin role!");
@@ -61,7 +64,7 @@ public class UserService {
 
     }
 
-    public User registerNewUser(User user){
+    public User registerNewUser(User user) {
         Role role = roleDao.findById("User").orElseThrow(() -> new EntityNotFoundException("Role not found for ID: User"));
         Set<Role> roles = new HashSet<>();
         roles.add(role);
@@ -70,8 +73,12 @@ public class UserService {
         return userDao.save(user);
     }
 
-    public String getEncodedPassword(String password){
+    public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    public List<User> getAllUsers() {
+        return userDao.findAll();
     }
 
 }
