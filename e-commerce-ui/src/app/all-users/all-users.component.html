@@ -1,0 +1,53 @@
+<div class="container m-3">
+  <div class="usertable-heading p-2">
+    <h1>All Users</h1>
+  </div>
+  <mat-table [dataSource]="users" class="mat-elevation-z8">
+    <!-- Username Column -->
+    <ng-container matColumnDef="userId">
+      <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.userName }} </mat-cell>
+    </ng-container>
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="userFirstName">
+      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.userFirstName }} </mat-cell>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="userLastName">
+      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.userLastName }} </mat-cell>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="userEmail">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.userEmail }} </mat-cell>
+    </ng-container>
+    <!-- Password Column -->
+    <ng-container matColumnDef="userPassword">
+      <mat-header-cell *matHeaderCellDef> Password </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.userPassword }} </mat-cell>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span *ngFor="let role of user.role">{{ role.roleName }} </span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15, 25]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
