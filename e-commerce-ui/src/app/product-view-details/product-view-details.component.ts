@@ -3,6 +3,7 @@ import { Product } from '../model/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserAuthService } from '../services/user-auth.service';
 
 @Component({
   selector: 'app-product-view-details',
@@ -17,11 +18,16 @@ export class ProductViewDetailsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private userAuthService: UserAuthService
   ) {}
 
   ngOnInit(): void {
     this.product = this.activatedRoute.snapshot.data['product'];
+  }
+
+  isAdmin() {
+    return this.userAuthService.isAdmin();
   }
 
   changeIndex(index: number) {

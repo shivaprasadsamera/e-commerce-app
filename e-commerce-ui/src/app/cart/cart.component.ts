@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,11 @@ export class CartComponent implements OnInit {
   ];
   cartDetails: any[] = [];
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getCartDetails();
@@ -48,8 +53,12 @@ export class CartComponent implements OnInit {
   deleteCartItem(cartId: number) {
     this.productService.deleteCartItem(cartId).subscribe({
       next: (response) => {
+        // Show success notification
+        this.snackBar.open('Removed successfully!', 'Close', {
+          duration: 3000,
+          panelClass: ['custom-snackbar-success'],
+        });
         this.getCartDetails();
-        alert(`Cart item is removed successfully!`);
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);

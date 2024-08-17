@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../model/product.model';
 import { ProductService } from '../services/product.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { timestamp } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-buy-product',
@@ -32,7 +32,8 @@ export class BuyProductComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -127,7 +128,8 @@ export class BuyProductComponent implements OnInit {
       currency: response.currency,
       name: 'e-Shop a shop for all',
       description: 'Test Transaction',
-      image: 'https://www.reshot.com/free-svg-icons/item/wallet-Z2XGC5U6P4/',
+      image:
+        'https://img.freepik.com/free-photo/person-paying-using-nfc-technology_23-2149893758.jpg?ga=GA1.2.1451940686.1722627754&semt=ais_hybrid',
       handler: (response: any) => {
         // Handle successful payment here
         if (
@@ -137,7 +139,11 @@ export class BuyProductComponent implements OnInit {
           response.razorpay_signature
         ) {
           this.paymentResponse(response, orderForm);
-          alert('Payment Successful');
+          // Show success notification
+          this.snackBar.open('Payment successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['custom-snackbar-success'],
+          });
           // console.log('Payment Successful');
           // console.log('Payment ID:', response.razorpay_payment_id);
           // console.log('Order ID:', response.razorpay_order_id);

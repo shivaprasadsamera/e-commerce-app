@@ -8,7 +8,6 @@ export class UserAuthService implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  
 
   // setRoles
   public setRoles(roles: []) {
@@ -51,11 +50,17 @@ export class UserAuthService implements OnInit {
 
   public isAdmin() {
     const roles: any[] = this.getRoles();
-    return roles[0].roleName === 'Admin';
+    if (roles && roles.length > 0) {
+      return roles[0].roleName === 'Admin';
+    }
+    return false;
   }
 
   public isUser() {
     const roles: any[] = this.getRoles();
-    return roles[0].roleName === 'User';
+    if (roles && roles.length > 0) {
+      return roles[0].roleName === 'User';
+    }
+    return false;
   }
 }

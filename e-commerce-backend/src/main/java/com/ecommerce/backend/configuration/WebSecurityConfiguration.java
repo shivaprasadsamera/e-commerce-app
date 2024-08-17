@@ -43,7 +43,7 @@ public class WebSecurityConfiguration {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/api/users/registerNewUser", "/api/products/getAllProducts", "/api/products/getProductDetailsById/{productId}").permitAll()
+                .antMatchers("/authenticate", "/api/users/registerNewUser", "/api/products/getAllProducts", "/api/products/getProductDetailsById/{productId}", "api/contact/submitContactForm").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)

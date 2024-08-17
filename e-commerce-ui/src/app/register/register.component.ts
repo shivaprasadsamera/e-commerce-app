@@ -3,6 +3,7 @@ import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,11 @@ export class RegisterComponent implements OnInit {
   hide = true;
   errorMessage: string | null = null;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private snackBar: MatSnackBar
+  ) {}
   ngOnInit(): void {}
 
   navigateToLogin(): void {
@@ -23,6 +28,12 @@ export class RegisterComponent implements OnInit {
   register(registerForm: NgForm) {
     this.userService.registerNewUser(registerForm.value).subscribe({
       next: (response: any) => {
+        // Show success notification
+        this.snackBar.open('Registered successfully!', 'Close', {
+          duration: 3000,
+          panelClass: ['custom-snackbar-success'],
+        });
+        //navigate to login page
         this.router.navigate(['/login']);
       },
       error: (error: HttpErrorResponse) => {

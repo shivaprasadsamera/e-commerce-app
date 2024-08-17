@@ -7,6 +7,7 @@ import { ShowProductImagesDialogComponent } from '../show-product-images-dialog/
 import { ImageProcessingService } from '../services/image-processing.service';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-show-product-details',
@@ -32,7 +33,8 @@ export class ShowProductDetailsComponent implements OnInit {
     private productService: ProductService,
     public imagesDialog: MatDialog,
     private imageProcessingService: ImageProcessingService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,11 @@ export class ShowProductDetailsComponent implements OnInit {
   public deleteProduct(productId: number) {
     this.productService.deleteProduct(productId).subscribe({
       next: (response) => {
+        // Show success notification
+        this.snackBar.open('Deleted successfully!', 'Close', {
+          duration: 3000,
+          panelClass: ['custom-snackbar-success'],
+        });
         this.getAllProducts();
       },
       error: (error: HttpErrorResponse) => {

@@ -12,7 +12,7 @@
 
       <h2>Email</h2>
       <p>
-        <a href="mailto:shivaprasadsamera5@eshop.com">support&#64;eshop.com</a>
+        <a href="mailto:shivaprasadsamera45@gmail.com">support&#64;eshop.com</a>
       </p>
     </div>
 
@@ -24,26 +24,21 @@
           type="text"
           id="name"
           name="name"
-          [(ngModel)]=contactForm.name
+          [(ngModel)]="contactForm.name"
           required
         />
 
         <label for="email">Email</label>
-        <input type="text" id="email" name="email"   ngModel />
+        <input type="text" id="email" name="email" ngModel />
 
         <label for="phone">Phone</label>
-        <input type="text" id="phone" name="phone"  ngModel />
+        <input type="text" id="phone" name="phone" ngModel />
 
         <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5"  ngModel></textarea>
+        <textarea id="message" name="message" rows="5" ngModel></textarea>
 
         <button type="submit">Send Message</button>
       </form>
-    </div>
-
-    <div class="map">
-      <h2>Find Us</h2>
-      <div id="map"></div>
     </div>
   </section>
 </main>
@@ -59,19 +54,3 @@
     </nav>
   </div>
 </footer>
-<script>
-  function initMap() {
-    var location = { lat: 40.7128, lng: -74.006 }; // Replace with your location's latitude and longitude
-    var map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15,
-      center: location,
-    });
-    var marker = new google.maps.Marker({
-      position: location,
-      map: map,
-    });
-  }
-  // Initialize the map when the page loads
-  document.addEventListener("DOMContentLoaded", initMap);
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>

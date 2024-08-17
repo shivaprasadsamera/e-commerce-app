@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './add-new-product.component.css',
 })
 export class AddNewProductComponent implements OnInit {
-  isNewProduct = true;
+  isNewProduct: boolean = true;
 
   product: Product = {
     productId: 0,
@@ -81,8 +81,13 @@ export class AddNewProductComponent implements OnInit {
       this.product.productImages.push(fileHandle);
     }
   }
-  removeImages(i: number) {
-    this.product.productImages.splice(i, 1);
+  removeImages(index: number) {
+    console.log('Remove button clicked, index:', index);
+    if (this.product.productImages && this.product.productImages.length > index) {
+      this.product.productImages.splice(index, 1);
+    } else {
+      console.log('Invalid index or empty images array');
+    }
   }
 
   fileDropped(fileHandle: FileHandle) {

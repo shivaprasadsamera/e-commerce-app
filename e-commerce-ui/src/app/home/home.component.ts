@@ -5,6 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs';
 import { Product } from '../model/product.model';
 import { Router } from '@angular/router';
+import { UserAuthService } from '../services/user-auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +22,17 @@ export class HomeComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private imageProcessingService: ImageProcessingService,
-    private router: Router
+    private router: Router,
+    private userAuthService: UserAuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
+  }
+
+  public isAdmin() {
+    return this.userAuthService.isAdmin();
   }
 
   public loadMoreProducts() {
@@ -65,6 +73,22 @@ export class HomeComponent implements OnInit {
 
   showProductDetails(productId: number) {
     this.router.navigate(['/productViewDetails', { productId: productId }]);
+  }
+
+  addToCart(productId: number) {
+    this.productService.addToCart(productId).subscribe({
+      next: (response: any) => {
+        // console.log(response);
+        // Show success notification
+        this.snackBar.open('Added to the cart successfully!', 'Close', {
+          duration: 3000,
+          panelClass: ['custom-snackbar-success'],
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('Error: ', error);
+      },
+    });
   }
 
   privacyPolicy() {

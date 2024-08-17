@@ -35,13 +35,7 @@
         My Orders
       </button>
 
-      <button
-        mat-raised-button
-        routerLink="/imageGallery"
-        *ngIf="isLoggedIn()"
-      >
-        Gallery
-      </button>
+    
 
       <!-- Admin Actions -->
       <ng-container *ngIf="isLoggedIn() && isAdmin()">
