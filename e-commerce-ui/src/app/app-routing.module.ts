@@ -23,7 +23,6 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AllOrdersInfoComponent } from './all-orders-info/all-orders-info.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { ContactedUsersComponent } from './contacted-users/contacted-users.component';
-import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
 
 const routes: Routes = [
   { path: '', title: 'Home | eShop', component: HomeComponent },
@@ -132,7 +131,6 @@ const routes: Routes = [
     data: { roles: ['Admin'] },
   },
   { path: 'register', component: RegisterComponent },
-  { path: 'imageGallery', component: ImageGalleryComponent },
 ];
 
 @NgModule({

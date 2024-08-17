@@ -48,11 +48,11 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { ContactedUsersComponent } from './contacted-users/contacted-users.component';
 import { IndianNumberPipe } from './custom-pipes/indian-number.pipe';
-import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -80,7 +80,6 @@ import { MatSliderModule } from '@angular/material/slider';
     AllUsersComponent,
     ContactedUsersComponent,
     IndianNumberPipe,
-    ImageGalleryComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +104,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatStepperModule,
     MatCardModule,
     MatSelectModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSnackBarModule,
   ],
   providers: [
     { provide: 'authGuard', useValue: authGuard },
