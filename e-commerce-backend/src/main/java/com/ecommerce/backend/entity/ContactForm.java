@@ -1,6 +1,6 @@
 package com.ecommerce.backend.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 @Entity

@@ -11,7 +11,7 @@ import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import io.github.cdimascio.dotenv.Dotenv;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

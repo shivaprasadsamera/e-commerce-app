@@ -1,6 +1,6 @@
 package com.ecommerce.backend.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -8,7 +8,8 @@ import java.util.Set;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
+    @SequenceGenerator(name = "product_seq", sequenceName = "product_sequence", allocationSize = 1)
     private Integer productId;
     private String productName;
 

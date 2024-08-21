@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration {
@@ -36,16 +35,15 @@ public class WebSecurityConfiguration {
         this.jwtService = jwtService;
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors()
                 .and()
                 .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/authenticate", "/api/users/registerNewUser", "/api/products/getAllProducts", "/api/products/getProductDetailsById/{productId}", "api/contact/submitContactForm").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/authenticate", "/api/users/registerNewUser", "/api/products/getAllProducts", "/api/products/getProductDetailsById/{productId}", "/api/contact/submitContactForm").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -71,6 +69,4 @@ public class WebSecurityConfiguration {
                 .authenticationProvider(authenticationProvider)
                 .build();
     }
-
-
 }

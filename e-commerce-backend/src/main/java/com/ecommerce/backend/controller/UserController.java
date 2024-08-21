@@ -3,7 +3,7 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.service.UserService;
 import com.ecommerce.backend.entity.User;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

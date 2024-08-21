@@ -3,9 +3,11 @@ package com.ecommerce.backend.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +20,7 @@ public class JwtUtil {
     private static final String SECRET_KEY = "jwt_authentication";
     private static final int TOKEN_VALIDITY = 3600 * 5;
 
+    private static final SecretKey GENERATED_SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -29,7 +32,7 @@ public class JwtUtil {
     }
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(GENERATED_SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
@@ -54,7 +57,7 @@ public class JwtUtil {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .signWith(GENERATED_SECRET_KEY)
                 .compact();
     }
 

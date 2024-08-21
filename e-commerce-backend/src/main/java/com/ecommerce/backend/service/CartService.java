@@ -9,6 +9,9 @@ import com.ecommerce.backend.entity.Product;
 import com.ecommerce.backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -33,9 +36,9 @@ public class CartService {
         Product product = productDao.findById(productId).orElseThrow(() -> new NoSuchElementException("Product not found with id " + productId));
         String currentUser = JwtRequestFilter.CURRENT_USER;
 
-        User user =null;
+        User user = null;
 
-        if (currentUser != null){
+        if (currentUser != null) {
             user = userDao.findById(currentUser)
                     .orElseThrow(() -> new NoSuchElementException("User not found with id " + currentUser));
         }
@@ -43,28 +46,28 @@ public class CartService {
         List<Cart> cartList = cartDao.findByUser(user);
         List<Cart> filteredCartList = cartList.stream()
                 .filter(cart -> cart.getProduct().getProductId().equals(productId))
-                .toList();
+                .collect(Collectors.toList());
 
-        if(!filteredCartList.isEmpty()){
+        if (!filteredCartList.isEmpty()) {
             return null;
         }
 
-        if (product != null && user != null){
-            Cart cart = new Cart(product,user);
+        if (product != null && user != null) {
+            Cart cart = new Cart(product, user);
             return cartDao.save(cart);
         }
         return null;
 
     }
 
-   public List<Cart> getCartDetails(){
+    public List<Cart> getCartDetails() {
         String userName = JwtRequestFilter.CURRENT_USER;
         User user = userDao.findById(userName)
                 .orElseThrow(() -> new NoSuchElementException("User not found with id " + userName));
         return cartDao.findByUser(user);
     }
 
-    public void deleteCartItem(Integer cartId){
+    public void deleteCartItem(Integer cartId) {
         cartDao.deleteById(cartId);
     }
 

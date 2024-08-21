@@ -8,7 +8,7 @@ import com.ecommerce.backend.entity.Cart;
 import com.ecommerce.backend.entity.Product;
 import com.ecommerce.backend.entity.User;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
